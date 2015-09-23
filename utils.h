@@ -1,11 +1,6 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-
-class Utils
-{
-public:
-    Utils();
-};
+extern int getRandomValue(int min, int max);
 
 #endif // UTILS_H
