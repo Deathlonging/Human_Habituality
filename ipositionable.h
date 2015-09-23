@@ -1,0 +1,5 @@
+#ifndef IPOSITIONABLE
+#define IPOSITIONABLE
+
+#endif // IPOSITIONABLE
+

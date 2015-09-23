@@ -1,0 +1,5 @@
+#ifndef DEBUGHANDLING
+#define DEBUGHANDLING
+
+#endif // DEBUGHANDLING
+

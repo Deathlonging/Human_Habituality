@@ -1,0 +1,5 @@
+#ifndef IUPDATEABLE
+#define IUPDATEABLE
+
+#endif // IUPDATEABLE
+
