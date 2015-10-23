@@ -15,7 +15,8 @@ SOURCES += main.cpp \
     debughandling.cpp \
     utils.cpp \
     human.cpp \
-    character.cpp
+    character.cpp \
+    mapview.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -28,10 +29,12 @@ HEADERS += \
     application.h \
     debughandling.h \
     mapblock.h \
-    position.h \
     ipositionable.h \
     utils.h \
     iupdateable.h \
     human.h \
-    character.h
+    character.h \
+    idirectionable.h \
+    mapview.h \
+    imoveable.h
 

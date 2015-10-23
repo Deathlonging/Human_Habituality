@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-MapBlock::MapBlock(sf::RenderWindow &window, Position position, BlockType blockType) : iDrawable(window), mPosition(position), mBlockType(blockType)
+MapBlock::MapBlock(sf::RenderWindow &window, Position position, BlockType blockType) : iDrawable(window), iPositionable(position), mBlockType(blockType)
 {
 
 }
@@ -23,7 +23,7 @@ void MapBlock::draw() const
     }
 
     square.setFillColor(mapBlockColor);
-    square.setPosition(sf::Vector2f(mPosition.getXValue()*getBlockSize(),mPosition.getYValue()*getBlockSize()));
+    square.setPosition(sf::Vector2f(getPosition().getXValue()*getBlockSize(),getPosition().getYValue()*getBlockSize()));
     mWindow.draw(square);
 }
 

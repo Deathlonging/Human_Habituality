@@ -81,7 +81,7 @@ void Application::setCurrentState(Application::State nextState)
         PROCESS_VAL(Pause)
         PROCESS_VAL(Closing)
 #undef PROCESS_VAL
-        default: break;
+        default: printWarning("Unimplemented Application::State : " + (int) nextState);break;
         }
     }
 }

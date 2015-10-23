@@ -2,11 +2,11 @@
 #define MAPBLOCK_H
 
 #include "idrawable.h"
-#include "position.h"
+#include "ipositionable.h"
 
 #define MAP_BLOCK_SIZE 10
 
-class MapBlock : public iDrawable
+class MapBlock : public iDrawable, public iPositionable
 {
 public:
     enum BlockType{
@@ -24,7 +24,6 @@ public:
 
     static double getBlockSize();
 private:
-    const Position mPosition;
     const BlockType mBlockType;
 };
 

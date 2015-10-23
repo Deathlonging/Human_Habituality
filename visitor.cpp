@@ -15,11 +15,11 @@ void Visitor::draw() const
 {
     sf::CircleShape circle(VISITOR_SIZE);
     circle.setFillColor(sf::Color::Yellow);
-    circle.setPosition(sf::Vector2f(mPosition.getXValue()*sBlockSize,mPosition.getYValue()*sBlockSize));
+    circle.setPosition(sf::Vector2f(getPosition().getXValue()*sBlockSize,getPosition().getYValue()*sBlockSize));
     mWindow.draw(circle);
 }
 
-void Visitor::update(sf::Time timeDelta)
+void Visitor::update(sf::Time/* timeDelta*/)
 {
 
 }
