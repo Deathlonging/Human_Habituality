@@ -1,6 +1,7 @@
 #ifndef VISITOR_H
 #define VISITOR_H
 
+#include "map.h"
 #include "idrawable.h"
 #include "ipositionable.h"
 #include "iupdateable.h"
@@ -14,7 +15,7 @@
 class Visitor : public iDrawable, public iPositionable, public iUpdateable
 {
 public:
-    Visitor(sf::RenderWindow &window, const Position position);
+    Visitor(sf::RenderWindow &window, const Map& map, const Position position);
     void draw() const;
     void update(sf::Time timeDelta);
     static void setBlockSize(double blocksize);

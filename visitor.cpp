@@ -4,7 +4,7 @@
 
 #include "debughandling.h"
 
-Visitor::Visitor(sf::RenderWindow& window, const Position position) : iDrawable(window), iPositionable(position)
+Visitor::Visitor(sf::RenderWindow& window, const Map &map, const Position position) : iDrawable(window), iPositionable(map,position)
 {
     std::stringstream debugInformationMessage;
     debugInformationMessage << "Created Visitor(" << position.getXValue() << "," << position.getYValue() << ")";

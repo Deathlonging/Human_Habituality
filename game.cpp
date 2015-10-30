@@ -40,8 +40,8 @@ void Game::createVisitor()
 {
     if(getRandomValue(0,100)<=CHANCE_OF_CREATING_VISITOR_IN_PERCENT)
     {
-        Position positionOfVisitor(getRandomValue(0,MAP_SIZE_X-1),getRandomValue(0,MAP_SIZE_Y-1));
-        Visitor* p_Visitor = new Visitor(mWindow,positionOfVisitor);
+        Position positionOfVisitor(Vector2D(getRandomValue(0,MAP_SIZE_X-1),getRandomValue(0,MAP_SIZE_Y-1)));
+        Visitor* p_Visitor = new Visitor(mWindow,mMap,positionOfVisitor);
         mVisitors.push_back(p_Visitor);
     }
 }

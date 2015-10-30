@@ -1,12 +1,9 @@
 #ifndef IDIRECTIONABLE
 #define IDIRECTIONABLE
 
-struct Vector2D{
-    double x;
-    double y;
-};
-
 #include <math.h>
+
+#include "utils.h"
 
 class Direction {
 public:

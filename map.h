@@ -5,6 +5,7 @@
 
 #include "idrawable.h"
 #include "mapblock.h"
+#include "utils.h"
 
 #define MAP_SIZE_X 50
 #define MAP_SIZE_Y 50
@@ -17,9 +18,16 @@ public:
     void load();
     void draw() const;
 
+    int getMapSizeBlocksX() const;
+    int getMapSizeBlocksY() const;
+
+    bool isBlockAt(const double x, const double y) const;
+    MapBlock getMapBlockAt(const double x, const double y) const;
+    MapBlock getMapBlockAt(const Vector2D position) const;
+
     static double getBlockSize();
 private:
-    std::map<const std::pair<int,int>,MapBlock> mBlocks;
+    std::map<const MapBlock::Position,MapBlock> mBlocks;
 };
 
 #endif // MAP_H

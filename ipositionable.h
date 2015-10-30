@@ -1,37 +1,60 @@
 #ifndef IPOSITIONABLE
 #define IPOSITIONABLE
 
+#include "utils.h"
+#include "map.h"
+
 class Position{
 public:
-    Position() : xValue(0.0), yValue(0.0)/*, zValue(0.0)*/
+    Position() : mPositionVector(){}
+    Position(const Vector2D startPosition) : mPositionVector(startPosition)
     {}
-    Position(const double x, const double y/*, double z*/) : xValue(x), yValue(y)/*, zValue(z)*/
-    {}
-    void change(const double dx, const double dy/*, double dz*/){xValue+=dx;yValue+=dy;/*zValue+=dz;*/}
 
-    double getXValue() const {return xValue;}
-    double getYValue() const {return yValue;}
+    void change(const double dx, const double dy/*, double dz*/){mPositionVector.x+=dx;mPositionVector.y+=dy;/*zValue+=dz;*/}
+    void change(const Vector2D deltaDistance){this->change(deltaDistance.x,deltaDistance.y);}
+
+    double getXValue() const {return mPositionVector.x;}
+    double getYValue() const {return mPositionVector.y;}
+
+    Vector2D getPositionVector() const {return this->mPositionVector;}
     //double getZValue() const {return zValue;}
-    void setXValue(const double value){xValue = value;}
-    void setYValue(const double value){yValue = value;}
+    void setXValue(const double value){mPositionVector.x = value;}
+    void setYValue(const double value){mPositionVector.y = value;}
     //void setZValue(double value){zValue = value;}
 
 private:
-    double xValue;
-    double yValue;
-    //double zValue;
+    Vector2D mPositionVector;
 };
 
 class iPositionable {
 
 protected:
-    iPositionable(){}
-    iPositionable(const Position position) : mPosition(position){}
+    iPositionable(const Map& map) : mMap(map){}
+    iPositionable(const Map& map,const Position position) : mMap(map),mPosition(position){}
     Position getPosition() const {return mPosition;}
     void setPosition(const Position position) {mPosition = position;}
-    void changePosition(const double dx, const double dy/*, double dz*/)
-    {mPosition.change(dx, dy/*, dz*/);}
+
+    bool isPositionWalkable(const Position position) const {
+        MapBlock mapBlock = mMap.getMapBlockAt(position.getPositionVector());
+        return mapBlock.isWalkable();
+    }
+
+    bool changePosition(const double dx, const double dy/*, double dz*/)
+    {
+        Position oldPosition = this->getPosition();
+        mPosition.change(dx, dy/*, dz*/);
+        if(isPositionWalkable(mPosition))
+        {
+            return true;
+        }
+        mPosition = oldPosition;
+        return false;
+    }
+    bool changePosition(const Vector2D deltaDistance)
+    {return this->changePosition(deltaDistance.x,deltaDistance.y);}
+
 private:
+    const Map& mMap;
     Position mPosition;
 };
 
