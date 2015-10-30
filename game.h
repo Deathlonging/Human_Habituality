@@ -8,8 +8,7 @@
 #include "map.h"
 #include "visitor.h"
 
-#define FREQUENCE_OF_VISITOR_CREATE_CALLS 0.5
-#define CHANCE_OF_CREATING_VISITOR_IN_PERCENT 3
+#define COUNT_OF_VISITORS 10
 
 class Game : public iDrawable, public iUpdateable
 {
@@ -23,8 +22,7 @@ private:
     std::list<Visitor*> mVisitors;
     sf::Time mGameTime;
 
-    sf::Time mTimeSinceLastCreateVisitorCall;
-    void createVisitor();
+    void createTestszenario();
 };
 
 #endif // GAME_H

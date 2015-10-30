@@ -14,16 +14,15 @@ Game::Game(sf::RenderWindow &window) : iDrawable(window), mMap(window), mGameTim
 void Game::init()
 {
     mMap.init();
+    createTestszenario();
 }
 
 void Game::update(sf::Time timeDelta)
 {
     mGameTime += timeDelta;
-    mTimeSinceLastCreateVisitorCall += timeDelta;
-    if(mTimeSinceLastCreateVisitorCall.asSeconds() > ((float)1/FREQUENCE_OF_VISITOR_CREATE_CALLS))
+    for(auto& visitor: mVisitors)
     {
-        createVisitor();
-        mTimeSinceLastCreateVisitorCall = sf::Time::Zero;
+        visitor->update();
     }
 }
 
@@ -36,9 +35,9 @@ void Game::draw() const
     }
 }
 
-void Game::createVisitor()
+void Game::createTestszenario()
 {
-    if(getRandomValue(0,100)<=CHANCE_OF_CREATING_VISITOR_IN_PERCENT)
+    for(int i=0;i<COUNT_OF_VISITORS;i++)
     {
         Position positionOfVisitor(Vector2D(getRandomValue(0,MAP_SIZE_X-1),getRandomValue(0,MAP_SIZE_Y-1)));
         Visitor* p_Visitor = new Visitor(mWindow,mMap,positionOfVisitor);
