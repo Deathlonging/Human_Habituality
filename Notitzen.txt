@@ -1,0 +1,13 @@
+1.
+Positionable funktioniert noch nicht.
+Grund: Map::MapBlock wird von Positionable abgeleitet und Positionable hat Map als Member.
+Positionable sollte Map als Member behalten, um überprüfen zu können ob auf der Karte oder nicht.
+Daher muss MapBlock überarbeitet werden. Ein konstanter Vector2D (in Utils.h) sollte ausreichen.
+
+2. Updateable erweitern.
+Es soll nur nach vordefinierten Zeitintervallen die Updatelogik ausgeführt werden. Diese soll Klassenabhängig sein.
+Eine abstrakte protect Funktion sollte von allen Basisklassen implementiert werden. Namensbeispiel: updateFunction (nicht gut)
+
+3. Draw Funktionen überarbeiten!
+
+4. Move macht bisher noch wenig Sinn. Überarbeiten!
