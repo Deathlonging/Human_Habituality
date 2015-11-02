@@ -6,7 +6,7 @@
 #include "idrawable.h"
 #include "iupdateable.h"
 #include "map.h"
-#include "visitor.h"
+#include "mapobject.h"
 
 #define COUNT_OF_VISITORS 10
 
@@ -19,7 +19,7 @@ public:
     void draw() const;
 private:
     Map mMap;
-    std::list<Visitor*> mVisitors;
+    std::list<MapObject*> mMapObjects;
     sf::Time mGameTime;
 
     void createTestszenario();

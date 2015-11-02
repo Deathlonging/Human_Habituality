@@ -4,7 +4,7 @@
 
 #include "debughandling.h"
 
-Visitor::Visitor(sf::RenderWindow& window, const Map &map, const Position position) : iDrawable(window), iPositionable(map,position)
+Visitor::Visitor(sf::RenderWindow& window, const Map &map, const Position position, const Direction direction, double maxVelocity, double maxAccelration) : MapObject(window), iMoveable(map,position,direction,maxVelocity,maxAccelration)
 {
     std::stringstream debugInformationMessage;
     debugInformationMessage << "Created Visitor(" << position.getXValue() << "," << position.getYValue() << ")";
@@ -19,9 +19,9 @@ void Visitor::draw() const
     mWindow.draw(circle);
 }
 
-void Visitor::update(sf::Time/* timeDelta*/)
+void Visitor::update(sf::Time timeDelta)
 {
-
+    move(timeDelta);
 }
 
 void Visitor::setBlockSize(double blocksize)

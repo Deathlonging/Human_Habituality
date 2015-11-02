@@ -4,6 +4,7 @@
 #include <math.h>
 
 #include "utils.h"
+#include "debughandling.h"
 
 class Direction {
 public:
@@ -18,6 +19,9 @@ public:
         SouthWest = 0x0C,
         NorthWest = 0x09
     };
+
+    CardinalDirection CombineCardinalDirections(CardinalDirection a, CardinalDirection b) const
+    {return static_cast<CardinalDirection>(static_cast<int>(a) | static_cast<int>(b));}
 
     Direction(){}
     Direction(const double radianMeasure) : mRadianMeasure(radianMeasure) {}
@@ -39,19 +43,19 @@ public:
         CardinalDirection cardinalDirection = NoDirection;
         if(unitVector.y>0)
         {
-            cardinalDirection |= North;
+            cardinalDirection = CombineCardinalDirections(cardinalDirection,North);
         }
         else if(unitVector.y<0)
         {
-            cardinalDirection |= South;
+            cardinalDirection = CombineCardinalDirections(cardinalDirection,South);
         }
         if(unitVector.x>0)
         {
-            cardinalDirection |= East;
+            cardinalDirection = CombineCardinalDirections(cardinalDirection,East);
         }
         else if(unitVector.x<0)
         {
-            cardinalDirection |= West;
+            cardinalDirection = CombineCardinalDirections(cardinalDirection,West);
         }
         return cardinalDirection;
     }

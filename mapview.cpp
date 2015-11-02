@@ -1,6 +1,6 @@
 #include "mapview.h"
 
-MapView::MapView(Map& map) : mMap(map)
+MapView::MapView(const Map& map) : mMap(map)
 {
 
 }

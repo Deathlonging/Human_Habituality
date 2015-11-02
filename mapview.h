@@ -6,10 +6,10 @@
 class MapView
 {
 public:
-    MapView(Map& map);
+    MapView(const Map& map);
 
 private:
-    Map& mMap;
+    const Map& mMap;
 };
 
 #endif // MAPVIEW_H
