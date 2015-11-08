@@ -4,7 +4,8 @@
 
 #include "debughandling.h"
 
-Visitor::Visitor(sf::RenderWindow& window, const Map &map, const Position position, const Direction direction, double maxVelocity, double maxAccelration) : MapObject(window), iMoveable(map,position,direction,maxVelocity,maxAccelration)
+Visitor::Visitor(sf::RenderWindow& window, MapView &mapView, const Position position, const Direction direction, const VelocityParameterSet velocityMaxParameters)
+    : MoveableMapObject(window, mapView,position, direction, velocityMaxParameters)
 {
     std::stringstream debugInformationMessage;
     debugInformationMessage << "Created Visitor(" << position.getXValue() << "," << position.getYValue() << ")";
@@ -15,7 +16,8 @@ void Visitor::draw() const
 {
     sf::CircleShape circle(VISITOR_SIZE);
     circle.setFillColor(sf::Color::Yellow);
-    circle.setPosition(sf::Vector2f(getPosition().getXValue()*sBlockSize,getPosition().getYValue()*sBlockSize));
+    Position currentPosition = iPositionable::getPosition();
+    circle.setPosition(sf::Vector2f(currentPosition.getXValue()*sBlockSize,currentPosition.getYValue()*sBlockSize));
     mWindow.draw(circle);
 }
 

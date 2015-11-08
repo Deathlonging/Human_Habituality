@@ -5,6 +5,8 @@ Eine abstrakte protect Funktion sollte von allen Basisklassen implementiert werd
 2. Draw Funktionen überarbeiten!
 
 3. MapView weiß welche Gebiete auf der Karte aktuell verwendet werden bzw. wo sich welches Objekt befindet.
-Damit kann iMoveable rausfinden wo es laufen kann.
+Damit kann iMoveable rausfinden wo es laufen kann. Ausprogrammieren
 
-4. iDirectionable braucht eine Dreh-Beschleunigung und Dreh-Geschwindigkeit
+4. iDirectionable braucht eine Dreh-Beschleunigung und Dreh-Geschwindigkeit. Ausprogrammieren!
+
+Aktuelles Problem: Virtuelle Tabelle von MoveableMapObject passt nicht. Ableitungshierachie muss überprüft werden!

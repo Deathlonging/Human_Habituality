@@ -11,58 +11,65 @@
 class iMoveable : public iPositionable, public iDirectionable
 {
 public:
-    iMoveable(const Map& map, Position position, Direction direction, MeterPerSeconds maxVelocity, MeterPerSeconds_2 maxAccelration)
-        : iPositionable(map, position), iDirectionable(direction), mMaxVelocity(fabs(maxVelocity)), mMaxAccelration(fabs(maxAccelration))
+    struct VelocityParameterSet{
+        VelocityParameterSet() : Velocity(0), Accelration(0), AngularVelocity(0), AngularAccelration(0) {}
+        MeterPerSecond Velocity;
+        MeterPerSecond_2 Accelration;
+        DegreePerSecond AngularVelocity;
+        DegreePerSecond_2 AngularAccelration;
+    };
+
+    iMoveable(const Position position, const Direction direction, const VelocityParameterSet maxParameters)
+        : iPositionable(position), iDirectionable(direction), mMaxParameters(maxParameters)
     {}
 
     void move(sf::Time timeDelta)
     {
         Vector2D currentMovementVector = this->getMovementVector(this->getDirection(),this->getCurrentMovedDistance(timeDelta));
         this->changePosition(currentMovementVector);
-        if(hasToSlamOnTheBreaks())
-        {
-            mCurrentAccelration = mCurrentVelocity >= 0 ? -mMaxAccelration : mMaxAccelration;
-        }
-        this->updateVelocity(timeDelta);
+        this->updateMovement(timeDelta);
     }
 
-private:
-    MeterPerSeconds mCurrentVelocity;
-    MeterPerSeconds_2 mCurrentAccelration;
-    const MeterPerSeconds mMaxVelocity;
-    const MeterPerSeconds_2 mMaxAccelration;
+    MeterPerSecond getCurrentVelocity() const {return mCurrentParameters.Velocity;}
+    void setCurrentVelocity(const MeterPerSecond &currentVelocity) {mCurrentParameters.Velocity=currentVelocity;}
+
+    MeterPerSecond_2 getCurrentAccelration() const {return mCurrentParameters.Accelration;}
+    void setCurrentAccelration(const MeterPerSecond_2 &currentAccelration) {mCurrentParameters.Accelration=currentAccelration;}
+
+    DegreePerSecond getCurrentAngularVelocity() const {return mCurrentParameters.AngularVelocity;}
+    void setCurrentAngularVelocity(const DegreePerSecond &currentAngularVelocity) {mCurrentParameters.AngularVelocity=currentAngularVelocity;}
+
+    DegreePerSecond_2 getCurrentAngularAccelration() const {return mCurrentParameters.AngularAccelration;}
+    void setCurrentAngularAccelration(const DegreePerSecond_2 &currentAngularAccelration) {mCurrentParameters.AngularAccelration=currentAngularAccelration;}
 
     Meter getSlamOnTheBreaksDistance() const
     {
-        return mMaxAccelration == 0.0 ? 0.0 : fabs(0.5 * mCurrentVelocity * mCurrentVelocity / mMaxAccelration); // s=-(1/2)(v0²/a)
+        return mMaxParameters.Accelration == 0.0 ? 0.0 : fabs(0.5 * mCurrentParameters.Velocity * mCurrentParameters.Velocity / mMaxParameters.Accelration); // s=-(1/2)(v0²/a)
     }
 
-    bool hasToSlamOnTheBreaks() const
+private:
+    VelocityParameterSet mCurrentParameters;
+    const VelocityParameterSet mMaxParameters;
+
+    void updateMovement(sf::Time timeDelta)
     {
-        Vector2D stoppingMovementVector = getMovementVector(this->getDirection(),this->getSlamOnTheBreaksDistance());
-        Position pointOfLastPossibleStop = this->getPosition().change(stoppingMovementVector);
-        if(this->mMap.isBlockAt(pointOfLastPossibleStop.getXValue(),pointOfLastPossibleStop.getYValue()))
+        mCurrentParameters.Velocity += (mCurrentParameters.Accelration * timeDelta.asSeconds());
+        if(fabs(mCurrentParameters.Velocity)>mMaxParameters.Velocity)
         {
-            MapBlock mapBlock = this->mMap.getMapBlockAt(pointOfLastPossibleStop.getXValue(),pointOfLastPossibleStop.getYValue());
-            return !mapBlock.isWalkable();
+            mCurrentParameters.Velocity = mCurrentParameters.Velocity >= 0 ? mMaxParameters.Velocity : -mMaxParameters.Velocity;
         }
-        return true;
-    }
-
-    void updateVelocity(sf::Time timeDelta)
-    {
-        mCurrentVelocity = (mCurrentAccelration * timeDelta.asSeconds()) + mCurrentVelocity;
-        if(fabs(mCurrentVelocity)>mMaxVelocity)
+        mCurrentParameters.AngularVelocity += (mCurrentParameters.AngularAccelration * timeDelta.asSeconds());
+        if(fabs(mCurrentParameters.AngularVelocity)>mMaxParameters.AngularVelocity)
         {
-            mCurrentVelocity = mCurrentVelocity >= 0 ? mMaxVelocity : -mMaxVelocity;
+            mCurrentParameters.AngularVelocity = mCurrentParameters.AngularVelocity >= 0 ? mMaxParameters.AngularVelocity : -mMaxParameters.AngularVelocity;
         }
     }
 
     Meter getCurrentMovedDistance(sf::Time timeDelta) const{
-        return this->mCurrentVelocity * timeDelta.asSeconds();
+        return this->mCurrentParameters.Velocity * timeDelta.asSeconds();
     }
 
-    static Vector2D getMovementVector(const Direction& direction, const Meter& distance) const
+    static Vector2D getMovementVector(const Direction& direction, const Meter& distance)
     {
         Vector2D directionUnitVector = direction.getUnitVector();
         return Vector2D(directionUnitVector.x * distance, directionUnitVector.y * distance);
@@ -70,3 +77,4 @@ private:
 };
 
 #endif // IMOVEABLE
+

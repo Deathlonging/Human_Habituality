@@ -22,39 +22,29 @@ public:
     void setYValue(const double value){mPositionVector.y = value;}
     //void setZValue(double value){zValue = value;}
 
+    bool operator ==(const Position& position) const {return mPositionVector==position.getPositionVector();}
+
 private:
     Vector2D mPositionVector;
 };
 
 class iPositionable {
-
-protected:
-    iPositionable(const Map& map) : mMap(map){}
-    iPositionable(const Map& map,const Position position) : mMap(map),mPosition(position){}
+public:
     Position getPosition() const {return mPosition;}
+protected:
+    iPositionable(const Position position) : mPosition(position){}
     void setPosition(const Position position) {mPosition = position;}
 
-    bool isPositionWalkable(const Position position) const {
-        MapBlock mapBlock = mMap.getMapBlockAt(position.getPositionVector());
-        return mapBlock.isWalkable();
-    }
-
-    bool changePosition(const double dx, const double dy/*, double dz*/)
+    void changePosition(const double dx, const double dy/*, double dz*/)
     {
-        Position oldPosition = this->getPosition();
         mPosition.change(dx, dy/*, dz*/);
-        if(isPositionWalkable(mPosition))
-        {
-            return true;
-        }
-        mPosition = oldPosition;
-        return false;
     }
-    bool changePosition(const Vector2D deltaDistance)
-    {return this->changePosition(deltaDistance.x,deltaDistance.y);}
+    void changePosition(const Vector2D deltaDistance)
+    {this->changePosition(deltaDistance.x,deltaDistance.y);}
+
+    Position & getPositionReference() {return this->mPosition;}
 
 private:
-    const Map& mMap;
     Position mPosition;
 };
 
