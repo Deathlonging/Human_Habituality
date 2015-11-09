@@ -8,10 +8,9 @@ class MoveableMapObject : public MapObject, public iMoveable
 {
 public:
     MoveableMapObject(sf::RenderWindow &window, MapView& mapView, const Position position, const Direction direction, const VelocityParameterSet velocityMaxParameters);
-    void draw() const;
-    void update(sf::Time timeDelta);
 
     Position getPosition() const;
+    void update(sf::Time timeDelta);
 };
 
 #endif // MOVEABLEMAPOBJECT_H

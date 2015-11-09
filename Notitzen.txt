@@ -8,5 +8,3 @@ Eine abstrakte protect Funktion sollte von allen Basisklassen implementiert werd
 Damit kann iMoveable rausfinden wo es laufen kann. Ausprogrammieren
 
 4. iDirectionable braucht eine Dreh-Beschleunigung und Dreh-Geschwindigkeit. Ausprogrammieren!
-
-Aktuelles Problem: Virtuelle Tabelle von MoveableMapObject passt nicht. Ableitungshierachie muss überprüft werden!

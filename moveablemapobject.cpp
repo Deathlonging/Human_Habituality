@@ -11,3 +11,8 @@ Position MoveableMapObject::getPosition() const
     return iMoveable::getPosition();
 }
 
+void MoveableMapObject::update(sf::Time timeDelta)
+{
+    this->move(timeDelta);
+}
+
