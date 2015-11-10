@@ -42,8 +42,6 @@ protected:
     void changePosition(const Vector2D deltaDistance)
     {this->changePosition(deltaDistance.x,deltaDistance.y);}
 
-    Position & getPositionReference() {return this->mPosition;}
-
 private:
     Position mPosition;
 };

@@ -7,6 +7,7 @@
 #include "debughandling.h"
 
 #define DIRECTION_CARDINAL_ROUNDING_PRECISION 0.25
+#define DEGREE_MAX 360.0
 
 class Direction {
 public:
@@ -27,16 +28,19 @@ public:
 
     Direction(){}
     Direction(const Degree radianMeasure) : mRadianMeasure(radianMeasure) {}
+    Direction(const CardinalDirection direction)
+    {setRadianMeasure(direction);}
 
     void change(Degree deltaRadianMeasure)
     {
         this->mRadianMeasure += deltaRadianMeasure;
-        this->mRadianMeasure = fmod(mRadianMeasure,2*M_PI);
+        this->mRadianMeasure = fmod(mRadianMeasure,DEGREE_MAX);
     }
 
     Vector2D getUnitVector() const
     {
-        return Vector2D(sin(mRadianMeasure),cos(mRadianMeasure));
+        double radiant = mRadianMeasure * M_PI * 2 / DEGREE_MAX;
+        return Vector2D(sin(radiant),-cos(radiant));
     }
 
     CardinalDirection getRoundedCardinalDirection() const
@@ -80,6 +84,8 @@ public:
     Degree getRadianMeasure() const {return mRadianMeasure;}
     void setRadianMeasure(const Degree radianMeasure) {mRadianMeasure = radianMeasure;}
 
+
+
 private:
     ///
     /// \brief mRadianMeasure
@@ -94,10 +100,11 @@ class iDirectionable {
 protected:
     iDirectionable() : mDirection(Direction()) {}
     iDirectionable(const Direction direction) : mDirection(direction) {}
+    iDirectionable(const Direction::CardinalDirection direction) : mDirection(direction) {}
     Direction getDirection() const{return mDirection;}
     void setDirection(const Direction &direction){mDirection = direction;}
 
-    Direction& getDirectionReference() {return this->mDirection;}
+    void changeDirection(const Degree &degree){mDirection.change(degree);}
 
 private:
     Direction mDirection;

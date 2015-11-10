@@ -19,7 +19,7 @@ public:
         DegreePerSecond_2 AngularAccelration;
     };
 
-    iMoveable(const Position position, const Direction direction, const VelocityParameterSet maxParameters)
+    iMoveable(const Position position, const Direction::CardinalDirection direction, const VelocityParameterSet maxParameters)
         : iPositionable(position), iDirectionable(direction), mMaxParameters(maxParameters)
     {}
 
@@ -27,6 +27,8 @@ public:
     {
         Vector2D currentMovementVector = this->getMovementVector(this->getDirection(),this->getCurrentMovedDistance(timeDelta));
         this->changePosition(currentMovementVector);
+        Degree currentTurningValue = this->getCurrentTurningDegree(timeDelta);
+        this->changeDirection(currentTurningValue);
         this->updateMovement(timeDelta);
     }
 
@@ -67,6 +69,10 @@ private:
 
     Meter getCurrentMovedDistance(sf::Time timeDelta) const{
         return this->mCurrentParameters.Velocity * timeDelta.asSeconds();
+    }
+
+    Degree getCurrentTurningDegree(sf::Time timeDelta) const{
+        return this->mCurrentParameters.AngularVelocity * timeDelta.asSeconds();
     }
 
     static Vector2D getMovementVector(const Direction& direction, const Meter& distance)

@@ -2,9 +2,10 @@
 
 #include <sstream>
 
+#include "utils.h"
 #include "debughandling.h"
 
-Visitor::Visitor(sf::RenderWindow& window, MapView &mapView, const Position position, const Direction direction, const VelocityParameterSet velocityMaxParameters)
+Visitor::Visitor(sf::RenderWindow& window, MapView &mapView, const Position position, const Direction::CardinalDirection direction, const VelocityParameterSet velocityMaxParameters)
     : MoveableMapObject(window, mapView,position, direction, velocityMaxParameters)
 {
     std::stringstream debugInformationMessage;
@@ -23,7 +24,9 @@ void Visitor::draw() const
 
 void Visitor::update(sf::Time timeDelta)
 {
-    move(timeDelta);
+    setCurrentAccelration((double)getRandomValue(0,100)/100);
+    //setCurrentAngularAccelration((double)getRandomValue(-100,100)/20);
+    MoveableMapObject::update(timeDelta);
 }
 
 void Visitor::setBlockSize(double blocksize)
