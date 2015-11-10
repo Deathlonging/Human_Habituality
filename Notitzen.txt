@@ -1,10 +1,20 @@
-1. Updateable erweitern.
+General:
+- Andere Objekte erstellen (Bäume, Bänke, Steine, Brunnen)
+
+Graphic:
+- Draw Funktionen überarbeiten!
+Gras als Bild verwenden und Mensch detallierter darstellen. Im weiteren kann eine Laufbewegung dargestellt werden
+
+Logic:
+- MapView weiß welche Gebiete auf der Karte aktuell verwendet werden bzw. wo sich welches Objekt befindet.
+Damit kann iMoveable rausfinden wo es laufen kann. Ausprogrammieren!
+
+- Sollgeschwindigkeit
+
+- Navigation entwickeln. Sollposition.
+
+- Zustandsautomaten für Mensch entwickeln.
+
+- [Priorität: Unwichtig] Updateable erweitern
 Es soll nur nach vordefinierten Zeitintervallen die Updatelogik ausgeführt werden. Diese soll Klassenabhängig sein.
 Eine abstrakte protect Funktion sollte von allen Basisklassen implementiert werden. Namensbeispiel: updateFunction (nicht gut)
-
-2. Draw Funktionen überarbeiten!
-
-3. MapView weiß welche Gebiete auf der Karte aktuell verwendet werden bzw. wo sich welches Objekt befindet.
-Damit kann iMoveable rausfinden wo es laufen kann. Ausprogrammieren
-
-4. iDirectionable braucht eine Dreh-Beschleunigung und Dreh-Geschwindigkeit. Ausprogrammieren!
