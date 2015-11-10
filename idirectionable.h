@@ -4,6 +4,10 @@
 #include <math.h>
 
 #include "utils.h"
+#include "debughandling.h"
+
+#define DIRECTION_CARDINAL_ROUNDING_PRECISION 0.25
+#define DEGREE_MAX 360.0
 
 class Direction {
 public:
@@ -19,39 +23,45 @@ public:
         NorthWest = 0x09
     };
 
-    Direction(){}
-    Direction(const double radianMeasure) : mRadianMeasure(radianMeasure) {}
+    CardinalDirection CombineCardinalDirections(CardinalDirection a, CardinalDirection b) const
+    {return static_cast<CardinalDirection>(static_cast<int>(a) | static_cast<int>(b));}
 
-    void change(double deltaRadianMeasure)
+    Direction(){}
+    Direction(const Degree radianMeasure) : mRadianMeasure(radianMeasure) {}
+    Direction(const CardinalDirection direction)
+    {setRadianMeasure(direction);}
+
+    void change(Degree deltaRadianMeasure)
     {
         this->mRadianMeasure += deltaRadianMeasure;
-        this->mRadianMeasure = fmod(mRadianMeasure,2*M_PI);
+        this->mRadianMeasure = fmod(mRadianMeasure,DEGREE_MAX);
     }
 
     Vector2D getUnitVector() const
     {
-        return Vector2D(sin(mRadianMeasure),cos(mRadianMeasure));
+        double radiant = mRadianMeasure * M_PI * 2 / DEGREE_MAX;
+        return Vector2D(sin(radiant),-cos(radiant));
     }
 
     CardinalDirection getRoundedCardinalDirection() const
     {
         Vector2D unitVector = this->getUnitVector();
         CardinalDirection cardinalDirection = NoDirection;
-        if(unitVector.y>0)
+        if(unitVector.y>DIRECTION_CARDINAL_ROUNDING_PRECISION)
         {
-            cardinalDirection |= North;
+            cardinalDirection = CombineCardinalDirections(cardinalDirection,North);
         }
-        else if(unitVector.y<0)
+        else if(unitVector.y<-DIRECTION_CARDINAL_ROUNDING_PRECISION)
         {
-            cardinalDirection |= South;
+            cardinalDirection = CombineCardinalDirections(cardinalDirection,South);
         }
-        if(unitVector.x>0)
+        if(unitVector.x>DIRECTION_CARDINAL_ROUNDING_PRECISION)
         {
-            cardinalDirection |= East;
+            cardinalDirection = CombineCardinalDirections(cardinalDirection,East);
         }
-        else if(unitVector.x<0)
+        else if(unitVector.x<-DIRECTION_CARDINAL_ROUNDING_PRECISION)
         {
-            cardinalDirection |= West;
+            cardinalDirection = CombineCardinalDirections(cardinalDirection,West);
         }
         return cardinalDirection;
     }
@@ -61,18 +71,20 @@ public:
         {
         case NoDirection:
         case North: mRadianMeasure = 0.0; break;
-        case NorthEast: mRadianMeasure = M_PI_4; break;
-        case East: mRadianMeasure = M_PI_2; break;
-        case SouthEast: mRadianMeasure = M_PI_2 + M_PI_4; break;
-        case South: mRadianMeasure = M_PI; break;
-        case SouthWest: mRadianMeasure = M_PI + M_PI_4; break;
-        case West: mRadianMeasure = M_PI + M_PI_2; break;
-        case NorthWest: mRadianMeasure = M_PI + M_PI_2 + M_PI_4; break;
+        case NorthEast: mRadianMeasure = 45.0; break;
+        case East: mRadianMeasure = 90.0; break;
+        case SouthEast: mRadianMeasure =  135.0; break;
+        case South: mRadianMeasure = 180.0; break;
+        case SouthWest: mRadianMeasure = 225.0; break;
+        case West: mRadianMeasure = 270.0; break;
+        case NorthWest: mRadianMeasure = 315.0; break;
         default: printWarning("Unimplemented CardinalDirection : " + (int) cardinalDirection); break;
         }
     }
-    double getRadianMeasure() const {return mRadianMeasure;}
-    void setRadianMeasure(const double radianMeasure) {mRadianMeasure = radianMeasure;}
+    Degree getRadianMeasure() const {return mRadianMeasure;}
+    void setRadianMeasure(const Degree radianMeasure) {mRadianMeasure = radianMeasure;}
+
+
 
 private:
     ///
@@ -80,7 +92,7 @@ private:
     ///
     /// \note zero Radian Measure means North direction
     ///
-    double mRadianMeasure;
+    Degree mRadianMeasure;
 };
 
 class iDirectionable {
@@ -88,8 +100,11 @@ class iDirectionable {
 protected:
     iDirectionable() : mDirection(Direction()) {}
     iDirectionable(const Direction direction) : mDirection(direction) {}
+    iDirectionable(const Direction::CardinalDirection direction) : mDirection(direction) {}
     Direction getDirection() const{return mDirection;}
     void setDirection(const Direction &direction){mDirection = direction;}
+
+    void changeDirection(const Degree &degree){mDirection.change(degree);}
 
 private:
     Direction mDirection;

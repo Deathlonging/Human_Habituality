@@ -16,7 +16,10 @@ SOURCES += main.cpp \
     utils.cpp \
     human.cpp \
     character.cpp \
-    mapview.cpp
+    mapview.cpp \
+    mapobject.cpp \
+    moveablemapobject.cpp \
+    nonmoveablemapobject.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -36,5 +39,8 @@ HEADERS += \
     character.h \
     idirectionable.h \
     mapview.h \
-    imoveable.h
+    imoveable.h \
+    mapobject.h \
+    moveablemapobject.h \
+    nonmoveablemapobject.h
 

@@ -2,17 +2,19 @@
 
 #include <math.h>
 
+#include "visitor.h"
 #include "utils.h"
 #include "debughandling.h"
+#include "mapview.h"
 
 Game::Game(sf::RenderWindow &window) : iDrawable(window), mMap(window), mGameTime(sf::Time::Zero)
 {
-    Visitor::setBlockSize(Map::getBlockSize());
     registerLogGameTime(&mGameTime);
 }
 
 void Game::init()
 {
+    Visitor::setBlockSize(Map::getBlockSize());
     mMap.init();
     createTestszenario();
 }
@@ -20,18 +22,18 @@ void Game::init()
 void Game::update(sf::Time timeDelta)
 {
     mGameTime += timeDelta;
-    for(auto& visitor: mVisitors)
+    for(auto& mapObject: mMapObjects)
     {
-        visitor->update();
+        mapObject->update(timeDelta);
     }
 }
 
 void Game::draw() const
 {
     this->mMap.draw();
-    for(auto& visitor: mVisitors)
+    for(auto& mapObject: mMapObjects)
     {
-        visitor->draw();
+        mapObject->draw();
     }
 }
 
@@ -40,8 +42,14 @@ void Game::createTestszenario()
     for(int i=0;i<COUNT_OF_VISITORS;i++)
     {
         Position positionOfVisitor(Vector2D(getRandomValue(0,MAP_SIZE_X-1),getRandomValue(0,MAP_SIZE_Y-1)));
-        Visitor* p_Visitor = new Visitor(mWindow,mMap,positionOfVisitor);
-        mVisitors.push_back(p_Visitor);
+        MoveableMapObject::VelocityParameterSet maxParameters;
+        maxParameters.Velocity = 5.0;
+        maxParameters.Accelration = 1.0;
+        maxParameters.AngularVelocity = 20.0;
+        maxParameters.AngularAccelration = 5.0;
+        MapView mapView(mMap,mMapObjects);
+        Visitor* p_Visitor = new Visitor(mWindow,mapView,positionOfVisitor,Direction::South,maxParameters);
+        mMapObjects.push_back(p_Visitor);
     }
 }
 

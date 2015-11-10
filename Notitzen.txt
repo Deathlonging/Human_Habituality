@@ -4,7 +4,7 @@ Eine abstrakte protect Funktion sollte von allen Basisklassen implementiert werd
 
 2. Draw Funktionen überarbeiten!
 
-3. Move macht bisher noch wenig Sinn. Überarbeiten!
-Welche Klassen sollten wie abgeleitet werden?
+3. MapView weiß welche Gebiete auf der Karte aktuell verwendet werden bzw. wo sich welches Objekt befindet.
+Damit kann iMoveable rausfinden wo es laufen kann. Ausprogrammieren
 
-4. Die Mapview braucht Ahnung von den Objekten auf der Karte
+4. iDirectionable braucht eine Dreh-Beschleunigung und Dreh-Geschwindigkeit. Ausprogrammieren!

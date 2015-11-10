@@ -5,10 +5,10 @@
 
 class iDrawable{
 public:
-    iDrawable(sf::RenderWindow& window) : mWindow(window)
-    {}
     virtual void draw() const=0;
 protected:
+    iDrawable(sf::RenderWindow& window) : mWindow(window)
+    {}
     sf::RenderWindow& mWindow;
 };
 
