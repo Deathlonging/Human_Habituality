@@ -3,17 +3,22 @@ General:
 
 Graphic:
 - Draw Funktionen überarbeiten!
+
+Ein Modell für jedes Object erstellen. Dafür benötigt jedes Objekt eine Sammlung aus allen Flächen die dargestellt werden.
+Diese Flächen sollen auch gleichzeitig als Grenzen für das Collision Modell benutzt werden. Dafür müssen Klassen für
+Flächen erstellt werden. eine Allgemeine abstracte Hauptklasse von der alle ableiten. Wichtig: jedes Objekt braucht
+einen Mittelpunkt, nämlich die aktuelle Position.
+
 Gras als Bild verwenden und Mensch detallierter darstellen. Im weiteren kann eine Laufbewegung dargestellt werden
 
 Logic:
 - MapView weiß welche Gebiete auf der Karte aktuell verwendet werden bzw. wo sich welches Objekt befindet.
 Damit kann iMoveable rausfinden wo es laufen kann. Ausprogrammieren!
 
-- Sollgeschwindigkeit
-
 - Navigation entwickeln. Sollposition.
 
 - Zustandsautomaten für Mensch entwickeln.
+MoveableObject sollte einen eigenen Zustandsautomaten haben mit den Zuständen: Stehen, Gehen, Rennen, Sprinten
 
 - [Priorität: Unwichtig] Updateable erweitern
 Es soll nur nach vordefinierten Zeitintervallen die Updatelogik ausgeführt werden. Diese soll Klassenabhängig sein.
