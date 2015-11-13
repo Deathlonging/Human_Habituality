@@ -23,8 +23,8 @@ public:
         Wood
     };
 
-    MapBlock(sf::RenderWindow& window, Position position, BlockType blockType);
-    void draw() const;
+    MapBlock(Position position, BlockType blockType);
+    void draw(sf::RenderTarget& target) const;
     BlockType getBlockType() const;
 
     bool isWalkable() const;

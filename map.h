@@ -13,10 +13,10 @@
 class Map : public iDrawable
 {
 public:
-    Map(sf::RenderWindow& window);
+    Map();
     void init();
     void load();
-    void draw() const;
+    void draw(sf::RenderTarget& target) const;
 
     int getMapSizeBlocksX() const;
     int getMapSizeBlocksY() const;

@@ -3,12 +3,12 @@
 
 #include <SFML/Graphics.hpp>
 
-MapBlock::MapBlock(sf::RenderWindow &window, Position position, BlockType blockType) : iDrawable(window), mPosition(position), mBlockType(blockType)
+MapBlock::MapBlock(Position position, BlockType blockType) : iDrawable(), mPosition(position), mBlockType(blockType)
 {
 
 }
 
-void MapBlock::draw() const
+void MapBlock::draw(sf::RenderTarget &target) const
 {
     sf::RectangleShape square(sf::Vector2f(MAP_BLOCK_SIZE,MAP_BLOCK_SIZE));
     sf::Color mapBlockColor;
@@ -24,7 +24,7 @@ void MapBlock::draw() const
 
     square.setFillColor(mapBlockColor);
     square.setPosition(sf::Vector2f(mPosition.x*getBlockSize(),mPosition.y*getBlockSize()));
-    mWindow.draw(square);
+    target.draw(square);
 }
 
 MapBlock::BlockType MapBlock::getBlockType() const

@@ -12,8 +12,8 @@
 class Visitor : public MoveableMapObject
 {
 public:
-    Visitor(sf::RenderWindow &window, MapView &mapView, const Position position, const Direction::CardinalDirection direction, const VelocityParameterSet velocityMaxParameters, PT1 VelocityProcessBlock);
-    void draw() const;
+    Visitor(MapView &mapView, const Position position, const Direction::CardinalDirection direction, const VelocityParameterSet velocityMaxParameters, PT1 VelocityProcessBlock);
+    void draw(sf::RenderTarget& target) const;
     void update(sf::Time timeDelta);
     static void setBlockSize(double blocksize);
 private:

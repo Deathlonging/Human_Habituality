@@ -1,7 +1,7 @@
 #include "mapobject.h"
 
-MapObject::MapObject(sf::RenderWindow &window, MapView &mapView)
-    : iDrawable(window), mMapView(mapView)
+MapObject::MapObject(MapView &mapView)
+    : iDrawable(), mMapView(mapView)
 {
 
 }

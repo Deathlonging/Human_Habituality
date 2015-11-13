@@ -10,7 +10,7 @@
 
 #define COUNT_OF_VISITORS 10
 
-class Game : public iDrawable, public iUpdateable
+class Game : public iUpdateable
 {
 public:
     Game(sf::RenderWindow& window);
@@ -21,6 +21,7 @@ private:
     Map mMap;
     std::list<MapObject*> mMapObjects;
     sf::Time mGameTime;
+    sf::RenderWindow& mWindow;
 
     void createTestszenario();
 };

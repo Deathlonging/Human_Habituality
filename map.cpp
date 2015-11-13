@@ -2,7 +2,7 @@
 
 #include "debughandling.h"
 
-Map::Map(sf::RenderWindow &window) : iDrawable(window)
+Map::Map() : iDrawable()
 {
 }
 
@@ -17,16 +17,16 @@ void Map::load()
     {
         for(int yPos=0; yPos<MAP_SIZE_Y; yPos++)
         {
-            mBlocks.emplace(MapBlock::Position(xPos,yPos),MapBlock(mWindow,MapBlock::Position(xPos,yPos),MapBlock::Gras));
+            mBlocks.emplace(MapBlock::Position(xPos,yPos),MapBlock(MapBlock::Position(xPos,yPos),MapBlock::Gras));
         }
     }
 }
 
-void Map::draw() const
+void Map::draw(sf::RenderTarget &target) const
 {
     for(auto& block: mBlocks)
     {
-        block.second.draw();
+        block.second.draw(target);
     }
 }
 
@@ -57,7 +57,7 @@ MapBlock Map::getMapBlockAt(const double x, const double y) const
     else
     {
         printError("Checked for not existent Mapblock!");
-        return MapBlock(this->mWindow,MapBlock::Position(-1,-1),MapBlock::Undefined);
+        return MapBlock(MapBlock::Position(-1,-1),MapBlock::Undefined);
     }
 }
 

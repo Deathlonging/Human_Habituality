@@ -11,7 +11,7 @@ class MapView;
 class MapObject : public iUpdateable, public iDrawable
 {
 public:
-    MapObject(sf::RenderWindow &window, MapView& mapView);
+    MapObject(MapView& mapView);
     virtual Position getPosition() const=0;
 protected:
     MapView& mMapView;

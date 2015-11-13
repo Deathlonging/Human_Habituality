@@ -8,7 +8,7 @@
 class NonMoveableMapObject : public MapObject, public iPositionable, public iDirectionable
 {
 public:
-    NonMoveableMapObject(sf::RenderWindow &window, MapView& mapView, const Position position, const Direction direction);
+    NonMoveableMapObject(MapView& mapView, const Position position, const Direction direction);
     virtual Position getPosition() const;
 };
 

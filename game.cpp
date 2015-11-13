@@ -7,7 +7,7 @@
 #include "debughandling.h"
 #include "mapview.h"
 
-Game::Game(sf::RenderWindow &window) : iDrawable(window), mMap(window), mGameTime(sf::Time::Zero)
+Game::Game(sf::RenderWindow &window) : mMap(), mGameTime(sf::Time::Zero), mWindow(window)
 {
     registerLogGameTime(&mGameTime);
 }
@@ -30,10 +30,10 @@ void Game::update(sf::Time timeDelta)
 
 void Game::draw() const
 {
-    this->mMap.draw();
+    this->mMap.draw(mWindow);
     for(auto& mapObject: mMapObjects)
     {
-        mapObject->draw();
+        mapObject->draw(mWindow);
     }
 }
 
@@ -48,7 +48,7 @@ void Game::createTestszenario()
         maxParameters.AngularVelocity = 20.0;
         maxParameters.AngularAccelration = 5.0;
         MapView mapView(mMap,mMapObjects);
-        Visitor* p_Visitor = new Visitor(mWindow,mapView,positionOfVisitor,Direction::South,maxParameters,PT1(1.0,0.5));
+        Visitor* p_Visitor = new Visitor(mapView,positionOfVisitor,Direction::South,maxParameters,PT1(1.0,0.5));
         p_Visitor->setTargetVelocity((double)getRandomValue(0,500)/100);
         mMapObjects.push_back(p_Visitor);
     }
