@@ -42,5 +42,6 @@ HEADERS += \
     imoveable.h \
     mapobject.h \
     moveablemapobject.h \
-    nonmoveablemapobject.h
+    nonmoveablemapobject.h \
+    controlelements.h
 

@@ -1,7 +1,7 @@
 #include "moveablemapobject.h"
 
-MoveableMapObject::MoveableMapObject(sf::RenderWindow &window, MapView& mapView, const Position position, const Direction::CardinalDirection direction, const VelocityParameterSet velocityMaxParameters)
-    : MapObject(window, mapView), iMoveable(position, direction, velocityMaxParameters)
+MoveableMapObject::MoveableMapObject(sf::RenderWindow &window, MapView& mapView, const Position position, const Direction::CardinalDirection direction, const VelocityParameterSet velocityMaxParameters, PT1 velocityProcessBlock)
+    : MapObject(window, mapView), iMoveable(position, direction, velocityMaxParameters, velocityProcessBlock)
 {
 
 }
