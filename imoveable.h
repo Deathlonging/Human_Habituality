@@ -25,7 +25,7 @@ public:
     };
 
     iMoveable(const Position position, const Direction::CardinalDirection direction, const VelocityParameterSet maxParameters, PT1 velocityProcessBlock)
-        : iPositionable(position), iDirectionable(direction), mMaxParameters(maxParameters), mVelocityProcessBlock(velocityProcessBlock)
+        : iPositionable(position), iDirectionable(direction), mMaxParameters(maxParameters), mVelocityProcessBlock(velocityProcessBlock), mAngularVelocityProcessBlock(velocityProcessBlock)
     {}
 
     void move(sf::Time timeDelta)
@@ -64,6 +64,7 @@ private:
     VelocityParameterSet mTargetParameters;
 
     PT1 mVelocityProcessBlock;
+    PT1 mAngularVelocityProcessBlock;
 
     void updateMovement(sf::Time timeDelta)
     {
@@ -87,7 +88,7 @@ private:
         }
         //instant accelration;
         DegreePerSecond angularVelocityDelta = mTargetParameters.AngularVelocity - mCurrentParameters.AngularVelocity;
-        DegreePerSecond_2 angularAccelrationDelta = mVelocityProcessBlock.ynext(timeDelta,angularVelocityDelta);
+        DegreePerSecond_2 angularAccelrationDelta = mAngularVelocityProcessBlock.ynext(timeDelta,angularVelocityDelta);
         mCurrentParameters.AngularAccelration += angularAccelrationDelta;
         if(mCurrentParameters.AngularAccelration > mMaxParameters.AngularAccelration)
         {
