@@ -5,7 +5,7 @@
 #include "utils.h"
 #include "debughandling.h"
 
-Visitor::Visitor(MapView &mapView, const Position position, const Direction::CardinalDirection direction, const VelocityParameterSet velocityMaxParameters, PT1 velocityProcessBlock)
+Visitor::Visitor(MapView &mapView, const Vector2D position, const Direction::CardinalDirection direction, const VelocityParameterSet velocityMaxParameters, PT1 velocityProcessBlock)
     : MoveableMapObject(mapView,position, direction, velocityMaxParameters, velocityProcessBlock)
 {
     std::stringstream debugInformationMessage;
@@ -13,11 +13,16 @@ Visitor::Visitor(MapView &mapView, const Position position, const Direction::Car
     printInformation(debugInformationMessage.str());
 }
 
+Visitor::~Visitor()
+{
+
+}
+
 void Visitor::draw(sf::RenderTarget &target) const
 {
     sf::CircleShape circle(VISITOR_SIZE);
     circle.setFillColor(sf::Color::Yellow);
-    Position currentPosition = iPositionable::getPosition();
+    Vector2D currentPosition = iPositionable::getPosition();
     circle.setPosition(sf::Vector2f(currentPosition.getXValue()*sBlockSize,currentPosition.getYValue()*sBlockSize));
     target.draw(circle);
 }

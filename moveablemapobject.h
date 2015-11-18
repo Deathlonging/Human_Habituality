@@ -7,9 +7,9 @@
 class MoveableMapObject : public MapObject, public iMoveable
 {
 public:
-    MoveableMapObject(MapView& mapView, const Position position, const Direction::CardinalDirection direction, const VelocityParameterSet velocityMaxParameters, PT1 velocityProcessBlock);
-
-    Position getPosition() const;
+    MoveableMapObject(MapView& mapView, const Vector2D position, const Direction::CardinalDirection direction, const VelocityParameterSet velocityMaxParameters, PT1 velocityProcessBlock);
+    virtual ~MoveableMapObject();
+    Vector2D getPosition() const;
     void update(sf::Time timeDelta);
 };
 

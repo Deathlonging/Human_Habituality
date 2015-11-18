@@ -6,3 +6,8 @@ MapObject::MapObject(MapView &mapView)
 
 }
 
+MapObject::~MapObject()
+{
+
+}
+

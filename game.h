@@ -14,6 +14,7 @@ class Game : public iUpdateable
 {
 public:
     Game(sf::RenderWindow& window);
+    ~Game();
     void init();
     void update(sf::Time timeDelta);
     void draw() const;

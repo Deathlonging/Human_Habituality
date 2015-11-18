@@ -24,7 +24,7 @@ public:
         DegreePerSecond_2 AngularAccelration;
     };
 
-    iMoveable(const Position position, const Direction::CardinalDirection direction, const VelocityParameterSet maxParameters, PT1 velocityProcessBlock)
+    iMoveable(const Vector2D position, const Direction::CardinalDirection direction, const VelocityParameterSet maxParameters, PT1 velocityProcessBlock)
         : iPositionable(position), iDirectionable(direction), mMaxParameters(maxParameters), mVelocityProcessBlock(velocityProcessBlock), mAngularVelocityProcessBlock(velocityProcessBlock)
     {}
 

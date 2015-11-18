@@ -12,7 +12,8 @@ class MapObject : public iUpdateable, public iDrawable
 {
 public:
     MapObject(MapView& mapView);
-    virtual Position getPosition() const=0;
+    virtual ~MapObject();
+    virtual Vector2D getPosition() const=0;
 protected:
     MapView& mMapView;
 };

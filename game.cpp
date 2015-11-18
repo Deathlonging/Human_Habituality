@@ -12,6 +12,15 @@ Game::Game(sf::RenderWindow &window) : mMap(), mGameTime(sf::Time::Zero), mWindo
     registerLogGameTime(&mGameTime);
 }
 
+Game::~Game()
+{
+    for(MapObject* p_MapObject : mMapObjects)
+    {
+        delete p_MapObject;
+        p_MapObject = nullptr;
+    }
+}
+
 void Game::init()
 {
     Visitor::setBlockSize(Map::getBlockSize());
@@ -41,7 +50,7 @@ void Game::createTestszenario()
 {
     for(int i=0;i<COUNT_OF_VISITORS;i++)
     {
-        Position positionOfVisitor(Vector2D(getRandomValue(0,MAP_SIZE_X-1),getRandomValue(0,MAP_SIZE_Y-1)));
+        Vector2D positionOfVisitor(getRandomValue(0,MAP_SIZE_X-1),getRandomValue(0,MAP_SIZE_Y-1));
         MoveableMapObject::VelocityParameterSet maxParameters;
         maxParameters.Velocity = 5.0;
         maxParameters.Accelration = 1.0;

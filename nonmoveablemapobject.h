@@ -8,8 +8,8 @@
 class NonMoveableMapObject : public MapObject, public iPositionable, public iDirectionable
 {
 public:
-    NonMoveableMapObject(MapView& mapView, const Position position, const Direction direction);
-    virtual Position getPosition() const;
+    NonMoveableMapObject(MapView& mapView, const Vector2D position, const Direction direction);
+    virtual Vector2D getPosition() const;
 };
 
 #endif // NONMOVEABLEMAPOBJECT_H

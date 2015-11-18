@@ -19,7 +19,11 @@ SOURCES += main.cpp \
     mapview.cpp \
     mapobject.cpp \
     moveablemapobject.cpp \
-    nonmoveablemapobject.cpp
+    nonmoveablemapobject.cpp \
+    Shapes/shape.cpp \
+    Shapes/circleshape.cpp \
+    Shapes/rectangleshape.cpp \
+    Shapes/groupshape.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -43,5 +47,9 @@ HEADERS += \
     mapobject.h \
     moveablemapobject.h \
     nonmoveablemapobject.h \
-    controlelements.h
+    controlelements.h \
+    Shapes/shape.h \
+    Shapes/circleshape.h \
+    Shapes/rectangleshape.h \
+    Shapes/groupshape.h
 

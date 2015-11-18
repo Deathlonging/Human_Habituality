@@ -1,0 +1,24 @@
+#ifndef GROUPSHAPE_H
+#define GROUPSHAPE_H
+
+#include <list>
+
+#include "shape.h"
+
+class GroupShape : public Shape
+{
+public:
+    GroupShape(Vector2D center);
+    virtual ~GroupShape();
+    void addShape(Shape &shape);
+    void rotate(Degree angle);
+    Degree getRotation() const;
+    void draw(sf::RenderTarget &target) const;
+    bool isColliding(const CircleShape& circle) const;
+    bool isColliding(const RectangleShape &rectangle) const;
+private:
+    std::list<Shape*> mShapes;
+    Degree mRotation;
+};
+
+#endif // GROUPSHAPE_H
