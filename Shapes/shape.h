@@ -18,6 +18,10 @@ public:
     virtual Degree getRotation() const = 0;
     virtual bool isColliding(const CircleShape& circle) const = 0;
     virtual bool isColliding(const RectangleShape &rectangle) const = 0;
+
+    virtual void setOutlineThickness(float thickness) = 0;
+    virtual void setFillColor(const sf::Color &color) = 0;
+    virtual void setOutlineColor(const sf::Color &color) = 0;
     virtual void draw(sf::RenderTarget& target) const = 0;
 protected:
     struct LineSegment{

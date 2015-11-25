@@ -36,8 +36,8 @@ void Vector2D::rotate(Degree angle)
     Meter absolute = this->getAbsolute();
     Degree currentAngle = this->getAngle();
     Degree nextAngle = angle+currentAngle;
-    setXValue(absolute*sin(nextAngle));
-    setYValue(-absolute*cos(nextAngle));
+    setXValue(-absolute*sin(nextAngle));
+    setYValue(absolute*cos(nextAngle));
 }
 
 Meter_2 Vector2D::getScalarProduct(const Vector2D &vec1, const Vector2D &vec2)

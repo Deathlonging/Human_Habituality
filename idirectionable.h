@@ -40,7 +40,7 @@ public:
     Vector2D getUnitVector() const
     {
         double radiant = mRadianMeasure * M_PI * 2 / DEGREE_MAX;
-        return Vector2D(sin(radiant),-cos(radiant));
+        return Vector2D(-sin(radiant),cos(radiant));
     }
 
     CardinalDirection getRoundedCardinalDirection() const

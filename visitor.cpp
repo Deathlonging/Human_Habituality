@@ -6,7 +6,7 @@
 #include "debughandling.h"
 
 Visitor::Visitor(MapView &mapView, const Vector2D position, const Direction::CardinalDirection direction, const VelocityParameterSet velocityMaxParameters, PT1 velocityProcessBlock)
-    : MoveableMapObject(mapView,position, direction, velocityMaxParameters, velocityProcessBlock)
+    : MoveableMapObject(mapView,position, direction, velocityMaxParameters, velocityProcessBlock), mBody(position,direction)
 {
     std::stringstream debugInformationMessage;
     debugInformationMessage << "Created Visitor(" << position.getXValue() << "," << position.getYValue() << ")";
@@ -20,11 +20,7 @@ Visitor::~Visitor()
 
 void Visitor::draw(sf::RenderTarget &target) const
 {
-    sf::CircleShape circle(VISITOR_SIZE);
-    circle.setFillColor(sf::Color::Yellow);
-    Vector2D currentPosition = iPositionable::getPosition();
-    circle.setPosition(sf::Vector2f(currentPosition.getXValue()*sBlockSize,currentPosition.getYValue()*sBlockSize));
-    target.draw(circle);
+    mBody.draw(target);
 }
 
 void Visitor::update(sf::Time timeDelta)
@@ -38,3 +34,26 @@ void Visitor::setBlockSize(double blocksize)
 }
 
 double Visitor::sBlockSize = 0.0;
+
+
+Visitor::VisitorShape::VisitorShape(Vector2D center, Direction direction)
+    : GroupShape(center), mHead(center,VISITOR_SIZE_HEAD),
+      mLeftShoulder(center,VISITOR_SIZE_SHOULDER), mRightShoulder(center,VISITOR_SIZE_SHOULDER),
+      mLeftFoot(center,VISITOR_SIZE_FOOT), mRightFoot(center,VISITOR_SIZE_FOOT)
+{
+    mLeftShoulder.changePosition(VISITOR_SIZE_HEAD/2,0.0);
+    mRightShoulder.changePosition(-VISITOR_SIZE_HEAD/2,0.0);
+    mLeftFoot.changePosition(VISITOR_SIZE_HEAD/4,0.0);
+    mRightFoot.changePosition(-VISITOR_SIZE_HEAD/4,0.0);
+    this->addShape(mHead);
+    this->addShape(mLeftShoulder);
+    this->addShape(mRightShoulder);
+    this->addShape(mLeftFoot);
+    this->addShape(mRightFoot);
+    this->rotate(direction.getRadianMeasure());
+}
+
+void Visitor::VisitorShape::moveFeet(Meter distance)
+{
+
+}

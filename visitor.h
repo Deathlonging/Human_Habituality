@@ -2,12 +2,17 @@
 #define VISITOR_H
 
 #include "moveablemapobject.h"
+#include "Shapes/circleshape.h"
+#include "Shapes/groupshape.h"
 
 #define VISITOR_TOTAL_MAX_VELOCITY 5
 #define VISITOR_TOTAL_MIN_VELOCITY 1
 #define VISITOR_TOTAL_MAX_ACCELRATION 2
 #define VISITOR_TOTAL_MIN_ACCELRATION 0.2
-#define VISITOR_SIZE 5
+
+#define VISITOR_SIZE_HEAD 4
+#define VISITOR_SIZE_SHOULDER 2
+#define VISITOR_SIZE_FOOT 2
 
 class Visitor : public MoveableMapObject
 {
@@ -20,6 +25,21 @@ public:
 private:
 
     static double sBlockSize;
+
+    class VisitorShape : public GroupShape
+    {
+    public:
+        VisitorShape(Vector2D center, Direction direction);
+        void moveFeet(Meter distance);
+    private:
+        CircleShape mHead;
+        CircleShape mLeftShoulder;
+        CircleShape mRightShoulder;
+        CircleShape mLeftFoot;
+        CircleShape mRightFoot;
+    };
+
+    VisitorShape mBody;
 };
 
 #endif // VISITOR_H

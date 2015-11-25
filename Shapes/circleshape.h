@@ -15,6 +15,9 @@ public:
     double getRadius() const;
     Degree getRotation() const;
     void rotate(Degree angle);
+    void setOutlineThickness(float thickness);
+    void setFillColor(const sf::Color& color);
+    void setOutlineColor(const sf::Color &color);
     void draw(sf::RenderTarget &target) const;
     bool isColliding(const CircleShape &circle) const;
     bool isColliding(const RectangleShape &rectangle) const;

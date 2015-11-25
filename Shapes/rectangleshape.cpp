@@ -55,6 +55,21 @@ void RectangleShape::rotate(Degree angle)
     this->mRectangle.rotate(angle);
 }
 
+void RectangleShape::setOutlineThickness(float thickness)
+{
+    this->mRectangle.setOutlineThickness(thickness);
+}
+
+void RectangleShape::setFillColor(const sf::Color &color)
+{
+    this->mRectangle.setFillColor(color);
+}
+
+void RectangleShape::setOutlineColor(const sf::Color& color)
+{
+    this->mRectangle.setOutlineColor(color);
+}
+
 void RectangleShape::draw(sf::RenderTarget &target) const
 {
     target.draw(this->mRectangle);

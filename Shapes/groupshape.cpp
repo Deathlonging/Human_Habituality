@@ -3,7 +3,7 @@
 #include "circleshape.h"
 #include "rectangleshape.h"
 
-GroupShape::GroupShape(Vector2D center) : Shape(center)
+GroupShape::GroupShape(Vector2D center) : Shape(center), mRotation(0.0)
 {
 
 }
@@ -32,6 +32,30 @@ void GroupShape::rotate(Degree angle)
 Degree GroupShape::getRotation() const
 {
     return mRotation;
+}
+
+void GroupShape::setOutlineThickness(float thickness)
+{
+    for(Shape* p_shape : mShapes)
+    {
+        p_shape->setOutlineThickness(thickness);
+    }
+}
+
+void GroupShape::setFillColor(const sf::Color &color)
+{
+    for(Shape* p_shape : mShapes)
+    {
+        p_shape->setFillColor(color);
+    }
+}
+
+void GroupShape::setOutlineColor(const sf::Color &color)
+{
+    for(Shape* p_shape : mShapes)
+    {
+        p_shape->setOutlineColor(color);
+    }
 }
 
 void GroupShape::draw(sf::RenderTarget &target) const

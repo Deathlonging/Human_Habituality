@@ -27,6 +27,21 @@ void CircleShape::rotate(Degree angle)
     this->mCircle.rotate(angle);
 }
 
+void CircleShape::setOutlineThickness(float thickness)
+{
+    this->mCircle.setOutlineThickness(thickness);
+}
+
+void CircleShape::setFillColor(const sf::Color &color)
+{
+    this->mCircle.setFillColor(color);
+}
+
+void CircleShape::setOutlineColor(const sf::Color &color)
+{
+    this->mCircle.setOutlineColor(color);
+}
+
 void CircleShape::draw(sf::RenderTarget &target) const
 {
     target.draw(this->mCircle);
