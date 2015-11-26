@@ -24,7 +24,8 @@ void GroupShape::rotate(Degree angle)
     {
         Vector2D centerToShape = p_shape->getPosition() - this->getPosition();
         centerToShape.rotate(angle);
-        p_shape->setPosition(this->getPosition() + centerToShape);
+        Vector2D newPosition = this->getPosition() + centerToShape;
+        p_shape->setPosition(newPosition);
         p_shape->rotate(angle);
     }
 }
@@ -88,5 +89,14 @@ bool GroupShape::isColliding(const RectangleShape &rectangle) const
         }
     }
     return false;
+}
+
+void GroupShape::changePosition(const double dx, const double dy)
+{
+    iPositionable::changePosition(dx,dy);
+    for(Shape* p_Shape : mShapes)
+    {
+        p_Shape->changePosition(dx,dy);
+    }
 }
 

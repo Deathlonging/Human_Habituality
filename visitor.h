@@ -19,8 +19,10 @@ class Visitor : public MoveableMapObject
 public:
     Visitor(MapView &mapView, const Vector2D position, const Direction::CardinalDirection direction, const VelocityParameterSet velocityMaxParameters, PT1 VelocityProcessBlock);
     virtual ~Visitor();
+    void init();
     void draw(sf::RenderTarget& target) const;
     void update(sf::Time timeDelta);
+    void moveModel(const Vector2D moveVector);
     static void setBlockSize(double blocksize);
 private:
 
@@ -31,6 +33,7 @@ private:
     public:
         VisitorShape(Vector2D center, Direction direction);
         void moveFeet(Meter distance);
+        void init(sf::Color headColor, sf::Color shoulderColor, sf::Color footColor);
     private:
         CircleShape mHead;
         CircleShape mLeftShoulder;

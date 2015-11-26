@@ -1,13 +1,10 @@
 #ifndef IDIRECTIONABLE
 #define IDIRECTIONABLE
 
-#include <math.h>
-
 #include "utils.h"
 #include "debughandling.h"
 
 #define DIRECTION_CARDINAL_ROUNDING_PRECISION 0.25
-#define DEGREE_MAX 360.0
 
 class Direction {
 public:

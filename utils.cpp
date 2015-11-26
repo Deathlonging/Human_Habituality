@@ -13,7 +13,21 @@ int getRandomValue(int min, int max)
     return min + (rand() % (max-min+1));
 }
 
-#include <cmath>
+bool isDoubleNull(const double value)
+{
+    static const double epsilon = std::numeric_limits<double>::epsilon();
+    return value< epsilon && value > -epsilon;
+}
+
+Radiant DegreeToRadiant(Degree angle)
+{
+    return angle*2*M_PI/DEGREE_MAX;
+}
+
+Degree RadiantToDegree(Radiant angle)
+{
+    return angle*DEGREE_MAX/(2*M_PI);
+}
 
 void Vector2D::change(Meter dx, Meter dy)
 {
@@ -28,16 +42,22 @@ Meter Vector2D::getAbsolute() const
 
 Degree Vector2D::getAngle() const
 {
-    return acos(getYValue()/getAbsolute()); //nördlich ist 0
+    return RadiantToDegree(atan(-getXValue()/getYValue()));
 }
 
 void Vector2D::rotate(Degree angle)
 {
+    //HERE IS THE PROBLEM!
     Meter absolute = this->getAbsolute();
+    if(isDoubleNull(absolute))
+    {
+        return;
+    }
     Degree currentAngle = this->getAngle();
     Degree nextAngle = angle+currentAngle;
-    setXValue(-absolute*sin(nextAngle));
-    setYValue(absolute*cos(nextAngle));
+    Radiant radiant = DegreeToRadiant(nextAngle);
+    setXValue(-absolute*sin(radiant));
+    setYValue(absolute*cos(radiant));
 }
 
 Meter_2 Vector2D::getScalarProduct(const Vector2D &vec1, const Vector2D &vec2)

@@ -21,6 +21,7 @@ public:
     void draw(sf::RenderTarget &target) const;
     bool isColliding(const CircleShape &circle) const;
     bool isColliding(const RectangleShape &rectangle) const;
+    void changePosition(const double dx, const double dy);
 private:
     sf::CircleShape mCircle;
 };

@@ -101,5 +101,11 @@ bool RectangleShape::isColliding(const CircleShape &circle) const
     return Shape::isColliding(circle,lines[0]) ||
            Shape::isColliding(circle,lines[1]) ||
            Shape::isColliding(circle,lines[2]) ||
-           Shape::isColliding(circle,lines[3]);
+            Shape::isColliding(circle,lines[3]);
+}
+
+void RectangleShape::changePosition(const double dx, const double dy)
+{
+    iPositionable::changePosition(dx,dy);
+    this->mRectangle.move(dx,dy);
 }

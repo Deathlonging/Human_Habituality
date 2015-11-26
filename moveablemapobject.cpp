@@ -18,6 +18,7 @@ Vector2D MoveableMapObject::getPosition() const
 
 void MoveableMapObject::update(sf::Time timeDelta)
 {
-    this->move(timeDelta);
+    Vector2D movedVector = this->move(timeDelta);
+    this->moveModel(movedVector);
 }
 

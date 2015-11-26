@@ -44,9 +44,7 @@ bool Shape::isColliding(const Shape::LineSegment &line1, const Shape::LineSegmen
     const Meter yB2 = line2.EndPoint.getYValue();
     const double denumerator = ((yB2-yB1)*(xA2-xA1))-((xB2-xB1)*(yA2-yA1));
     //Check if lines are parallel (numerator = 0)
-    //float point check for 0 therefore checking with epsilon
-    const double epsilon = std::numeric_limits<double>::epsilon();
-    if(denumerator < epsilon && denumerator > -epsilon)
+    if(isDoubleNull(denumerator))
     {
         return false;
     }

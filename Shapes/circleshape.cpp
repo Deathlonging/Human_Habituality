@@ -61,3 +61,9 @@ bool CircleShape::isColliding(const RectangleShape &rectangle) const
     return rectangle.isColliding(*this);
 }
 
+void CircleShape::changePosition(const double dx, const double dy)
+{
+    iPositionable::changePosition(dx,dy);
+    this->mCircle.move(dx,dy);
+}
+
