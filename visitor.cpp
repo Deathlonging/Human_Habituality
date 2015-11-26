@@ -6,7 +6,7 @@
 #include "debughandling.h"
 
 Visitor::Visitor(MapView &mapView, const Vector2D position, const Direction::CardinalDirection direction, const VelocityParameterSet velocityMaxParameters, PT1 velocityProcessBlock)
-    : MoveableMapObject(mapView,position, direction, velocityMaxParameters, velocityProcessBlock), mBody(VisitorShape(position,direction))
+    : MoveableMapObject(mapView,position, direction, velocityMaxParameters, velocityProcessBlock), mBody(VisitorShape(position*sBlockSize,direction))
 {
     this->init();
     std::stringstream debugInformationMessage;
@@ -21,7 +21,7 @@ Visitor::~Visitor()
 
 void Visitor::init()
 {
-    this->mBody.init(sf::Color(50,50,50,100),sf::Color::Blue,sf::Color::Black);
+    this->mBody.init(sf::Color(170,114,67),sf::Color::Blue,sf::Color::Black);
 }
 
 void Visitor::draw(sf::RenderTarget &target) const
@@ -56,11 +56,11 @@ Visitor::VisitorShape::VisitorShape(Vector2D center, Direction direction)
     mRightShoulder.changePosition(-VISITOR_SIZE_HEAD/2,0.0);
     mLeftFoot.changePosition(VISITOR_SIZE_HEAD/4,0.0);
     mRightFoot.changePosition(-VISITOR_SIZE_HEAD/4,0.0);
-    this->addShape(mHead);
-    this->addShape(mLeftShoulder);
-    this->addShape(mRightShoulder);
     this->addShape(mLeftFoot);
     this->addShape(mRightFoot);
+    this->addShape(mLeftShoulder);
+    this->addShape(mRightShoulder);
+    this->addShape(mHead);
     this->rotate(direction.getRadianMeasure());
 }
 

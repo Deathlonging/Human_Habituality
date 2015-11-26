@@ -8,6 +8,7 @@
 class GroupShape : public Shape
 {
 public:
+    using iPositionable::changePosition;
     GroupShape(Vector2D center);
     virtual ~GroupShape();
     void addShape(Shape &shape);

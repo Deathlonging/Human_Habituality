@@ -8,6 +8,7 @@
 class RectangleShape : public Shape
 {
 public:
+    using iPositionable::changePosition;
     RectangleShape(const Vector2D center, const double length, const double height);
     virtual ~RectangleShape();
     double getLength() const;

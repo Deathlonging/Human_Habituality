@@ -7,9 +7,11 @@
 
 #define SHAPE_POINTS_OF_CIRCLE 50
 
+
 class CircleShape : public Shape
 {
 public:
+    using iPositionable::changePosition;
     CircleShape(const Vector2D center, const double radius);
     virtual ~CircleShape();
     double getRadius() const;

@@ -16,7 +16,7 @@ void MapBlock::draw(sf::RenderTarget &target) const
     switch(mBlockType)
     {
     case Undefined: mapBlockColor = sf::Color::Black; break;
-    case Gras: mapBlockColor = sf::Color::Green; break;
+    case Gras: mapBlockColor = sf::Color(107,142,35); break;
     case Tar: mapBlockColor = sf::Color::Blue; break;
     case Wood: mapBlockColor = sf::Color::Red; break;
     default: printWarning("Unimplemented BlockType : " + (int) mBlockType); mapBlockColor = sf::Color::Cyan; break;
