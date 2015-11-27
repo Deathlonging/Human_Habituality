@@ -52,13 +52,13 @@ void Game::createTestszenario()
     {
         Vector2D positionOfVisitor(getRandomValue(0,MAP_SIZE_X-1),getRandomValue(0,MAP_SIZE_Y-1));
         MoveableMapObject::VelocityParameterSet maxParameters;
-        maxParameters.Velocity = 5.0;
-        maxParameters.Accelration = 1.0;
+        maxParameters.Velocity = 15.0;
+        maxParameters.Accelration = 5.0;
         maxParameters.AngularVelocity = 20.0;
         maxParameters.AngularAccelration = 5.0;
         MapView mapView(mMap,mMapObjects);
         Visitor* p_Visitor = new Visitor(mapView,positionOfVisitor,Direction::South,maxParameters,PT1(1.0,0.5));
-        p_Visitor->setTargetVelocity((double)getRandomValue(0,500)/100);
+        p_Visitor->setTargetVelocity((double)getRandomValue(0,1500)/100);
         mMapObjects.push_back(p_Visitor);
     }
 }

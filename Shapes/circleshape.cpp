@@ -45,11 +45,6 @@ void CircleShape::setOutlineColor(const sf::Color &color)
 
 void CircleShape::draw(sf::RenderTarget &target) const
 {
-//    sf::CircleShape circle(this->getRadius(),SHAPE_POINTS_OF_CIRCLE);
-//    Vector2D position = this->getPosition();
-//    circle.setPosition(position.getXValue(),position.getYValue());
-//    circle.setFillColor(sf::Color::Red);
-//    target.draw(circle);
     target.draw(this->mCircle);
 }
 
