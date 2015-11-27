@@ -4,7 +4,7 @@
 
 CircleShape::CircleShape(const Vector2D center, const double radius) : Shape(center), mCircle(sf::CircleShape(radius,SHAPE_POINTS_OF_CIRCLE))
 {
-    mCircle.setOrigin(radius/2,radius/2);
+    mCircle.setOrigin(radius,radius);
     mCircle.setPosition(center.getXValue(),center.getYValue());
 }
 
