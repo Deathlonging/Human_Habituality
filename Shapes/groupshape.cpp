@@ -24,8 +24,8 @@ void GroupShape::rotate(Degree angle)
     {
         Vector2D centerToShape = p_shape->getPosition() - this->getPosition();
         centerToShape.rotate(angle);
-        Vector2D newPosition = this->getPosition() + centerToShape;
-        p_shape->setPosition(newPosition);
+        Vector2D newCenter = this->getPosition() + centerToShape;
+        p_shape->setPosition(newCenter);
         p_shape->rotate(angle);
     }
 }
@@ -97,6 +97,15 @@ void GroupShape::changePosition(const double dx, const double dy)
     for(Shape* p_Shape : mShapes)
     {
         p_Shape->changePosition(dx,dy);
+    }
+}
+
+void GroupShape::setPosition(const Vector2D position)
+{
+    iPositionable::setPosition(position);
+    for(Shape* p_Shape : mShapes)
+    {
+        p_Shape->setPosition(position);
     }
 }
 

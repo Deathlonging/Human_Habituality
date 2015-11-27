@@ -3,7 +3,7 @@
 
 #include "idrawable.h"
 
-#define MAP_BLOCK_SIZE 20
+#define MAP_BLOCK_SIZE 15
 
 class MapBlock : public iDrawable
 {

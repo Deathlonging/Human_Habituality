@@ -24,6 +24,7 @@ public:
     bool isColliding(const CircleShape &circle) const;
     bool isColliding(const RectangleShape &rectangle) const;
     void changePosition(const double dx, const double dy);
+    void setPosition(const Vector2D position);
 private:
     sf::CircleShape mCircle;
 };

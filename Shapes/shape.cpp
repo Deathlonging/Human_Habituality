@@ -5,7 +5,6 @@
 
 Shape::Shape(const Vector2D center) : iPositionable(center)
 {
-
 }
 
 Shape::~Shape()

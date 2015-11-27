@@ -4,6 +4,7 @@
 
 CircleShape::CircleShape(const Vector2D center, const double radius) : Shape(center), mCircle(sf::CircleShape(radius,SHAPE_POINTS_OF_CIRCLE))
 {
+    mCircle.setOrigin(radius/2,radius/2);
     mCircle.setPosition(center.getXValue(),center.getYValue());
 }
 
@@ -70,5 +71,11 @@ void CircleShape::changePosition(const double dx, const double dy)
 {
     iPositionable::changePosition(dx,dy);
     this->mCircle.move(dx,dy);
+}
+
+void CircleShape::setPosition(const Vector2D position)
+{
+    iPositionable::setPosition(position);
+    this->mCircle.setPosition(position.getXValue(),position.getYValue());
 }
 

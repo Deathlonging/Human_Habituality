@@ -9,6 +9,7 @@ class GroupShape : public Shape
 {
 public:
     using iPositionable::changePosition;
+    using iPositionable::setPosition;
     GroupShape(Vector2D center);
     virtual ~GroupShape();
     void addShape(Shape &shape);
@@ -21,6 +22,7 @@ public:
     bool isColliding(const CircleShape& circle) const;
     bool isColliding(const RectangleShape &rectangle) const;
     void changePosition(const double dx, const double dy);
+    void setPosition(const Vector2D position);
 private:
     std::list<Shape*> mShapes;
     Degree mRotation;

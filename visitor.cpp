@@ -47,10 +47,10 @@ void Visitor::setBlockSize(double blocksize)
 double Visitor::sBlockSize = 0.0;
 
 
-Visitor::VisitorShape::VisitorShape(Vector2D center, Direction direction)
-    : GroupShape(center), mHead(CircleShape(center,VISITOR_SIZE_HEAD)),
-      mLeftShoulder(CircleShape(center,VISITOR_SIZE_SHOULDER)), mRightShoulder(CircleShape(center,VISITOR_SIZE_SHOULDER)),
-      mLeftFoot(CircleShape(center,VISITOR_SIZE_FOOT)), mRightFoot(CircleShape(center,VISITOR_SIZE_FOOT))
+Visitor::VisitorShape::VisitorShape(const Vector2D center, Direction direction)
+    : GroupShape(center), mHead(CircleShape(center,VISITOR_SIZE_HEAD/2)),
+      mLeftShoulder(CircleShape(center,VISITOR_SIZE_SHOULDER/2)), mRightShoulder(CircleShape(center,VISITOR_SIZE_SHOULDER/2)),
+      mLeftFoot(CircleShape(center,VISITOR_SIZE_FOOT/2)), mRightFoot(CircleShape(center,VISITOR_SIZE_FOOT/2))
 {
     mLeftShoulder.changePosition(VISITOR_SIZE_HEAD/2,0.0);
     mRightShoulder.changePosition(-VISITOR_SIZE_HEAD/2,0.0);

@@ -5,7 +5,8 @@
 RectangleShape::RectangleShape(const Vector2D center, const double length, const double height)
     : Shape(center), mRectangle(sf::RectangleShape(sf::Vector2f(length,height)))
 {
-
+    mRectangle.setOrigin(length/2,height/2);
+    mRectangle.setPosition(center.getXValue(),center.getYValue());
 }
 
 RectangleShape::~RectangleShape()
@@ -25,14 +26,14 @@ double RectangleShape::getHeight() const
 
 void RectangleShape::getVertices(Vector2D vertices[]) const
 {
-    Vector2D halfLengthVector(0,this->getLength()/2);
+    Vector2D halfLengthVector(this->getLength()/2,0.0);
     halfLengthVector.rotate(this->getRotation());
-    Vector2D halfHeightVector(this->getHeight()/2,0);
+    Vector2D halfHeightVector(0.0,this->getHeight()/2);
     halfHeightVector.rotate(this->getRotation());
     vertices[0] = getPosition() + halfLengthVector + halfHeightVector;
-    vertices[1] = getPosition() - halfLengthVector + halfHeightVector;
-    vertices[2] = getPosition() + halfLengthVector - halfHeightVector;
-    vertices[3] = getPosition() - halfLengthVector - halfHeightVector;
+    vertices[1] = getPosition() + halfLengthVector - halfHeightVector;
+    vertices[2] = getPosition() - halfLengthVector - halfHeightVector;
+    vertices[3] = getPosition() - halfLengthVector + halfHeightVector;
 }
 
 void RectangleShape::getBorderLines(Shape::LineSegment lines[]) const
@@ -101,11 +102,17 @@ bool RectangleShape::isColliding(const CircleShape &circle) const
     return Shape::isColliding(circle,lines[0]) ||
            Shape::isColliding(circle,lines[1]) ||
            Shape::isColliding(circle,lines[2]) ||
-            Shape::isColliding(circle,lines[3]);
+           Shape::isColliding(circle,lines[3]);
 }
 
 void RectangleShape::changePosition(const double dx, const double dy)
 {
     iPositionable::changePosition(dx,dy);
     this->mRectangle.move(dx,dy);
+}
+
+void RectangleShape::setPosition(const Vector2D position)
+{
+    iPositionable::setPosition(position);
+    this->mRectangle.setPosition(position.getXValue(),position.getYValue());
 }

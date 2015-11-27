@@ -9,6 +9,7 @@ class RectangleShape : public Shape
 {
 public:
     using iPositionable::changePosition;
+    using iPositionable::setPosition;
     RectangleShape(const Vector2D center, const double length, const double height);
     virtual ~RectangleShape();
     double getLength() const;
@@ -24,6 +25,7 @@ public:
     bool isColliding(const RectangleShape &rectangle) const;
     bool isColliding(const CircleShape &circle) const;
     void changePosition(const double dx, const double dy);
+    void setPosition(const Vector2D position);
 private:
     sf::RectangleShape mRectangle;
 };
