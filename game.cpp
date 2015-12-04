@@ -59,6 +59,7 @@ void Game::createTestszenario()
         MapView mapView(mMap,mMapObjects);
         Visitor* p_Visitor = new Visitor(mapView,positionOfVisitor,Direction::South,maxParameters,PT1(1.0,0.5));
         p_Visitor->setTargetVelocity((double)getRandomValue(0,1500)/100);
+        p_Visitor->setTargetAngularVelocity(15);
         mMapObjects.push_back(p_Visitor);
     }
 }

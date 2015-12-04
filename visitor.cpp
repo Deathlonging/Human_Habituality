@@ -39,6 +39,12 @@ void Visitor::moveModel(const Vector2D moveVector)
     this->mBody.changePosition(moveVector);
 }
 
+void Visitor::changeDirection(const Degree degree)
+{
+    iDirectionable::changeDirection(degree);
+    this->mBody.rotate(degree);
+}
+
 void Visitor::setBlockSize(double blocksize)
 {
     sBlockSize = blocksize;
@@ -61,6 +67,7 @@ Visitor::VisitorShape::VisitorShape(const Vector2D center, Direction direction)
     this->addShape(mLeftShoulder);
     this->addShape(mRightShoulder);
     this->addShape(mHead);
+
     this->rotate(direction.getRadianMeasure());
 }
 

@@ -23,6 +23,7 @@ public:
     void draw(sf::RenderTarget& target) const;
     void update(sf::Time timeDelta);
     void moveModel(const Vector2D moveVector);
+    void changeDirection(const Degree degree);
     static void setBlockSize(double blocksize);
 private:
 

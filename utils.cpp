@@ -42,12 +42,26 @@ Meter Vector2D::getAbsolute() const
 
 Degree Vector2D::getAngle() const
 {
-    return RadiantToDegree(atan(-getXValue()/getYValue()));
+    Meter x = getXValue(),y = getYValue();
+    Radiant angle;
+    if(isDoubleNull(x))
+    {
+        angle = M_PI_2;
+    }
+    else
+    {
+        angle = atan(y/x);
+    }
+    if(x<0.0)
+    {
+        angle += M_PI;
+    }
+    angle -= M_PI_2;
+    return RadiantToDegree(angle);
 }
 
 void Vector2D::rotate(Degree angle)
 {
-    //HERE IS THE PROBLEM!
     Meter absolute = this->getAbsolute();
     if(isDoubleNull(absolute))
     {

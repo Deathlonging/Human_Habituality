@@ -23,7 +23,7 @@ public:
     CardinalDirection CombineCardinalDirections(CardinalDirection a, CardinalDirection b) const
     {return static_cast<CardinalDirection>(static_cast<int>(a) | static_cast<int>(b));}
 
-    Direction(){}
+    Direction(): mRadianMeasure(0.0){}
     Direction(const Degree radianMeasure) : mRadianMeasure(radianMeasure) {}
     Direction(const CardinalDirection direction)
     {setRadianMeasure(direction);}
@@ -68,13 +68,13 @@ public:
         {
         case NoDirection:
         case North: mRadianMeasure = 0.0; break;
-        case NorthEast: mRadianMeasure = 45.0; break;
-        case East: mRadianMeasure = 90.0; break;
-        case SouthEast: mRadianMeasure =  135.0; break;
+        case NorthWest: mRadianMeasure = 45.0; break;
+        case West: mRadianMeasure = 90.0; break;
+        case SouthWest: mRadianMeasure =  135.0; break;
         case South: mRadianMeasure = 180.0; break;
-        case SouthWest: mRadianMeasure = 225.0; break;
-        case West: mRadianMeasure = 270.0; break;
-        case NorthWest: mRadianMeasure = 315.0; break;
+        case SouthEast: mRadianMeasure = 225.0; break;
+        case East: mRadianMeasure = 270.0; break;
+        case NorthEast: mRadianMeasure = 315.0; break;
         default: printWarning("Unimplemented CardinalDirection : " + (int) cardinalDirection); break;
         }
     }
@@ -101,7 +101,7 @@ protected:
     Direction getDirection() const{return mDirection;}
     void setDirection(const Direction &direction){mDirection = direction;}
 
-    void changeDirection(const Degree &degree){mDirection.change(degree);}
+    virtual void changeDirection(const Degree degree){mDirection.change(degree);}
 
 private:
     Direction mDirection;
