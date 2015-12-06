@@ -61,14 +61,14 @@ void RectangleShape::setOutlineThickness(float thickness)
     this->mRectangle.setOutlineThickness(thickness);
 }
 
-void RectangleShape::setFillColor(const sf::Color &color)
+void RectangleShape::setFillColor(const Color &color)
 {
-    this->mRectangle.setFillColor(color);
+    this->mRectangle.setFillColor(color.toSFMLColor());
 }
 
-void RectangleShape::setOutlineColor(const sf::Color& color)
+void RectangleShape::setOutlineColor(const Color& color)
 {
-    this->mRectangle.setOutlineColor(color);
+    this->mRectangle.setOutlineColor(color.toSFMLColor());
 }
 
 void RectangleShape::draw(sf::RenderTarget &target) const

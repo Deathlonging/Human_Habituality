@@ -1,6 +1,8 @@
 #ifndef MAPBLOCK_H
 #define MAPBLOCK_H
 
+#include <SFML/Graphics/RectangleShape.hpp>
+
 #include "idrawable.h"
 
 #define MAP_BLOCK_SIZE 15
@@ -24,6 +26,7 @@ public:
     };
 
     MapBlock(Position position, BlockType blockType);
+    void init(Position &position);
     void draw(sf::RenderTarget& target) const;
     BlockType getBlockType() const;
 
@@ -33,6 +36,7 @@ public:
 private:
     const Position mPosition;
     const BlockType mBlockType;
+    sf::RectangleShape mShape;
 };
 
 #endif // MAPBLOCK_H

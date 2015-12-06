@@ -23,7 +23,8 @@ SOURCES += main.cpp \
     Shapes/shape.cpp \
     Shapes/circleshape.cpp \
     Shapes/rectangleshape.cpp \
-    Shapes/groupshape.cpp
+    Shapes/groupshape.cpp \
+    color.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -51,5 +52,6 @@ HEADERS += \
     Shapes/shape.h \
     Shapes/circleshape.h \
     Shapes/rectangleshape.h \
-    Shapes/groupshape.h
+    Shapes/groupshape.h \
+    color.h
 

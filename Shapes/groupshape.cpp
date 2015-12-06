@@ -43,7 +43,7 @@ void GroupShape::setOutlineThickness(float thickness)
     }
 }
 
-void GroupShape::setFillColor(const sf::Color &color)
+void GroupShape::setFillColor(const Color &color)
 {
     for(Shape* p_shape : mShapes)
     {
@@ -51,7 +51,7 @@ void GroupShape::setFillColor(const sf::Color &color)
     }
 }
 
-void GroupShape::setOutlineColor(const sf::Color &color)
+void GroupShape::setOutlineColor(const Color &color)
 {
     for(Shape* p_shape : mShapes)
     {

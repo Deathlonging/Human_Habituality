@@ -32,9 +32,27 @@ private:
     class VisitorShape : public GroupShape
     {
     public:
+        struct cColorRef
+        {
+            cColorRef(const Color & ref) : ref(ref) {}
+            const Color& getRef() const {return ref;}
+        private:
+            const Color & ref;
+            void operator=(const cColorRef &);
+        };
+
         VisitorShape(Vector2D center, Direction direction);
         void moveFeet(Meter distance);
-        void init(sf::Color headColor, sf::Color shoulderColor, sf::Color footColor);
+        void init(Color headColor, Color shoulderColor, Color footColor);
+
+        static Color getHairColor();
+        static const cColorRef sHairColors[];
+        static const int sCountOfHairColors;
+
+        static Color getShoulderColor();
+        static const cColorRef sShoulderColor[];
+        static const int sCountOfShoulderColors;
+
     private:
         CircleShape mHead;
         CircleShape mLeftShoulder;

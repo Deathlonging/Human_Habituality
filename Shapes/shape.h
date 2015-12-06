@@ -5,6 +5,7 @@
 
 #include "ipositionable.h"
 #include "utils.h"
+#include "color.h"
 
 class CircleShape;
 class RectangleShape;
@@ -20,8 +21,8 @@ public:
     virtual bool isColliding(const RectangleShape &rectangle) const = 0;
 
     virtual void setOutlineThickness(float thickness) = 0;
-    virtual void setFillColor(const sf::Color &color) = 0;
-    virtual void setOutlineColor(const sf::Color &color) = 0;
+    virtual void setFillColor(const Color &color) = 0;
+    virtual void setOutlineColor(const Color &color) = 0;
     virtual void draw(sf::RenderTarget& target) const = 0;
 protected:
     struct LineSegment{

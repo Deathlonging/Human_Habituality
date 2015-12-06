@@ -8,7 +8,7 @@
 #include "map.h"
 #include "mapobject.h"
 
-#define COUNT_OF_VISITORS 2
+#define COUNT_OF_VISITORS 10
 
 class Game : public iUpdateable
 {

@@ -21,7 +21,7 @@ Visitor::~Visitor()
 
 void Visitor::init()
 {
-    this->mBody.init(sf::Color(170,114,67),sf::Color::Blue,sf::Color::Black);
+    this->mBody.init(VisitorShape::getHairColor(),VisitorShape::getShoulderColor(),Color::Black);
 }
 
 void Visitor::draw(sf::RenderTarget &target) const
@@ -76,7 +76,7 @@ void Visitor::VisitorShape::moveFeet(Meter /*distance*/)
 
 }
 
-void Visitor::VisitorShape::init(sf::Color headColor, sf::Color shoulderColor, sf::Color footColor)
+void Visitor::VisitorShape::init(Color headColor, Color shoulderColor, Color footColor)
 {
     mHead.setFillColor(headColor);
     mLeftShoulder.setFillColor(shoulderColor);
@@ -84,3 +84,35 @@ void Visitor::VisitorShape::init(sf::Color headColor, sf::Color shoulderColor, s
     mLeftFoot.setFillColor(footColor);
     mRightFoot.setFillColor(footColor);
 }
+
+Color Visitor::VisitorShape::getHairColor()
+{
+    return sHairColors[getRandomValue(0,sCountOfHairColors-1)].getRef();
+}
+
+const Visitor::VisitorShape::cColorRef Visitor::VisitorShape::sHairColors[] = {
+    Color::BrightYellow, Color::Yellow, Color::DarkYellow,
+    Color::BrightBrown, Color::Brown, Color::DarkBrown,
+    Color::BrightGrey, Color::Grey, Color::DarkGrey,
+    Color::Black
+};
+
+const int Visitor::VisitorShape::sCountOfHairColors = 3*3 + 1;
+
+Color Visitor::VisitorShape::getShoulderColor()
+{
+    return sShoulderColor[getRandomValue(0,sCountOfShoulderColors-1)].getRef();
+}
+
+const Visitor::VisitorShape::cColorRef Visitor::VisitorShape::sShoulderColor[] = {
+    Color::BrightRed, Color::Red, Color::DarkRed,
+    Color::BrightGreen, Color::Green, Color::DarkGreen,
+    Color::BrightBlue, Color::Blue, Color::DarkBlue,
+    Color::BrightYellow, Color::Yellow, Color::DarkYellow,
+    Color::BrightCyan, Color::Cyan, Color::DarkCyan,
+    Color::BrightViolet, Color::Violet, Color::DarkViolet,
+    Color::BrightBrown, Color::Brown, Color::DarkBrown,
+    Color::BrightGrey, Color::Grey, Color::DarkGrey
+};
+
+const int Visitor::VisitorShape::sCountOfShoulderColors = 8*3;

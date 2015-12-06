@@ -33,14 +33,14 @@ void CircleShape::setOutlineThickness(float thickness)
     this->mCircle.setOutlineThickness(thickness);
 }
 
-void CircleShape::setFillColor(const sf::Color &color)
+void CircleShape::setFillColor(const Color &color)
 {
-    this->mCircle.setFillColor(color);
+    this->mCircle.setFillColor(color.toSFMLColor());
 }
 
-void CircleShape::setOutlineColor(const sf::Color &color)
+void CircleShape::setOutlineColor(const Color &color)
 {
-    this->mCircle.setOutlineColor(color);
+    this->mCircle.setOutlineColor(color.toSFMLColor());
 }
 
 void CircleShape::draw(sf::RenderTarget &target) const
