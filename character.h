@@ -1,6 +1,6 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
-
+//Not an active class!
 
 class Character
 {

@@ -14,7 +14,6 @@ SOURCES += main.cpp \
     mapblock.cpp \
     debughandling.cpp \
     utils.cpp \
-    human.cpp \
     character.cpp \
     mapview.cpp \
     mapobject.cpp \
@@ -40,7 +39,6 @@ HEADERS += \
     ipositionable.h \
     utils.h \
     iupdateable.h \
-    human.h \
     character.h \
     idirectionable.h \
     mapview.h \

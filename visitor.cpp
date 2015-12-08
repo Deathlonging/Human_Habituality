@@ -34,9 +34,10 @@ void Visitor::update(sf::Time timeDelta)
     MoveableMapObject::update(timeDelta);
 }
 
-void Visitor::moveModel(const Vector2D moveVector)
+void Visitor::changePosition(const Vector2D deltaDistance)
 {
-    this->mBody.changePosition(moveVector);
+    iPositionable::changePosition(deltaDistance);
+    this->mBody.changePosition(deltaDistance);
 }
 
 void Visitor::changeDirection(const Degree degree)

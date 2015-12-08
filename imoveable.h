@@ -28,14 +28,13 @@ public:
         : iPositionable(position), iDirectionable(direction), mMaxParameters(maxParameters), mVelocityProcessBlock(velocityProcessBlock), mAngularVelocityProcessBlock(velocityProcessBlock)
     {}
 
-    Vector2D move(sf::Time timeDelta)
+    void move(sf::Time timeDelta)
     {
         Vector2D currentMovementVector = this->getMovementVector(this->getDirection(),this->getCurrentMovedDistance(timeDelta));
         this->changePosition(currentMovementVector);
         Degree currentTurningValue = this->getCurrentTurningDegree(timeDelta);
         this->changeDirection(currentTurningValue);
         this->updateMovement(timeDelta);
-        return currentMovementVector;
     }
     MeterPerSecond getTargetVelocity() const {return mTargetParameters.Velocity;}
     void setTargetVelocity(const MeterPerSecond &targetVelocity) {mTargetParameters.Velocity=targetVelocity;}

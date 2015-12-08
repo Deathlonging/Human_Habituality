@@ -11,7 +11,6 @@ public:
     virtual ~MoveableMapObject();
     Vector2D getPosition() const;
     void update(sf::Time timeDelta);
-    virtual void moveModel(const Vector2D moveVector) = 0;
 };
 
 #endif // MOVEABLEMAPOBJECT_H

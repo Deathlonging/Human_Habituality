@@ -12,7 +12,7 @@ public:
     {
         mPosition.change(dx, dy/*, dz*/);
     }
-    void changePosition(const Vector2D deltaDistance)
+    virtual void changePosition(const Vector2D deltaDistance)
     {this->changePosition(deltaDistance.x,deltaDistance.y);}
 protected:
     iPositionable(const Vector2D position) : mPosition(position){}
