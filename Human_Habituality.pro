@@ -23,7 +23,10 @@ SOURCES += main.cpp \
     Shapes/circleshape.cpp \
     Shapes/rectangleshape.cpp \
     Shapes/groupshape.cpp \
-    color.cpp
+    color.cpp \
+    feetmovement.cpp \
+    clock.cpp \
+    timeclass.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -51,5 +54,8 @@ HEADERS += \
     Shapes/circleshape.h \
     Shapes/rectangleshape.h \
     Shapes/groupshape.h \
-    color.h
+    color.h \
+    feetmovement.h \
+    clock.h \
+    timeclass.h
 

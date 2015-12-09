@@ -6,7 +6,7 @@
 #include "debughandling.h"
 
 Visitor::Visitor(MapView &mapView, const Vector2D position, const Direction::CardinalDirection direction, const VelocityParameterSet velocityMaxParameters, PT1 velocityProcessBlock)
-    : MoveableMapObject(mapView,position, direction, velocityMaxParameters, velocityProcessBlock), mBody(VisitorShape(position*sBlockSize,direction))
+    : MoveableMapObject(mapView,position, direction, velocityMaxParameters, velocityProcessBlock), mBody(VisitorShape(position*MapBlock::getBlockSize(),direction))
 {
     this->init();
     std::stringstream debugInformationMessage;
@@ -29,9 +29,15 @@ void Visitor::draw(sf::RenderTarget &target) const
     mBody.draw(target);
 }
 
-void Visitor::update(sf::Time timeDelta)
+void Visitor::update(Time timeDelta)
 {
     MoveableMapObject::update(timeDelta);
+}
+
+void Visitor::move(Time timeDelta)
+{
+    iMoveable::move(timeDelta);
+    mBody.moveFeet(timeDelta,this->getCurrentVelocity(),this->getCurrentDirectionUnitVector());
 }
 
 void Visitor::changePosition(const Vector2D deltaDistance)
@@ -46,16 +52,9 @@ void Visitor::changeDirection(const Degree degree)
     this->mBody.rotate(degree);
 }
 
-void Visitor::setBlockSize(double blocksize)
-{
-    sBlockSize = blocksize;
-}
-
-double Visitor::sBlockSize = 0.0;
-
 
 Visitor::VisitorShape::VisitorShape(const Vector2D center, Direction direction)
-    : GroupShape(center), mHead(CircleShape(center,VISITOR_SIZE_HEAD/2)),
+    : GroupShape(center),FeetMovement(mLeftFoot,mRightFoot,Time(2),(VISITOR_SIZE_HEAD/2)+VISITOR_SIZE_FOOT), mHead(CircleShape(center,VISITOR_SIZE_HEAD/2)),
       mLeftShoulder(CircleShape(center,VISITOR_SIZE_SHOULDER/2)), mRightShoulder(CircleShape(center,VISITOR_SIZE_SHOULDER/2)),
       mLeftFoot(CircleShape(center,VISITOR_SIZE_FOOT/2)), mRightFoot(CircleShape(center,VISITOR_SIZE_FOOT/2))
 {
@@ -70,11 +69,6 @@ Visitor::VisitorShape::VisitorShape(const Vector2D center, Direction direction)
     this->addShape(mHead);
 
     this->rotate(direction.getRadianMeasure());
-}
-
-void Visitor::VisitorShape::moveFeet(Meter /*distance*/)
-{
-
 }
 
 void Visitor::VisitorShape::init(Color headColor, Color shoulderColor, Color footColor)

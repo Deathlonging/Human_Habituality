@@ -4,6 +4,7 @@
 #include "moveablemapobject.h"
 #include "Shapes/circleshape.h"
 #include "Shapes/groupshape.h"
+#include "feetmovement.h"
 
 #define VISITOR_TOTAL_MAX_VELOCITY 5
 #define VISITOR_TOTAL_MIN_VELOCITY 1
@@ -21,15 +22,13 @@ public:
     virtual ~Visitor();
     void init();
     void draw(sf::RenderTarget& target) const;
-    void update(sf::Time timeDelta);
+    void update(Time timeDelta);
+    void move(Time timeDelta);
     void changePosition(const Vector2D deltaDistance);
     void changeDirection(const Degree degree);
-    static void setBlockSize(double blocksize);
 private:
 
-    static double sBlockSize;
-
-    class VisitorShape : public GroupShape
+    class VisitorShape : public GroupShape, public FeetMovement
     {
     public:
         struct cColorRef
@@ -42,7 +41,6 @@ private:
         };
 
         VisitorShape(Vector2D center, Direction direction);
-        void moveFeet(Meter distance);
         void init(Color headColor, Color shoulderColor, Color footColor);
 
         static Color getHairColor();

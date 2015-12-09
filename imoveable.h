@@ -1,13 +1,13 @@
 #ifndef IMOVEABLE
 #define IMOVEABLE
 
-#include <SFML/System/Time.hpp>
 #include <math.h>
 
 #include "ipositionable.h"
 #include "idirectionable.h"
 #include "utils.h"
 #include "controlelements.h"
+#include "timeclass.h"
 ///
 /// \brief The iMoveable class
 ///
@@ -28,7 +28,7 @@ public:
         : iPositionable(position), iDirectionable(direction), mMaxParameters(maxParameters), mVelocityProcessBlock(velocityProcessBlock), mAngularVelocityProcessBlock(velocityProcessBlock)
     {}
 
-    void move(sf::Time timeDelta)
+    virtual void move(Time timeDelta)
     {
         Vector2D currentMovementVector = this->getMovementVector(this->getDirection(),this->getCurrentMovedDistance(timeDelta));
         this->changePosition(currentMovementVector);
@@ -66,13 +66,13 @@ private:
     PT1 mVelocityProcessBlock;
     PT1 mAngularVelocityProcessBlock;
 
-    void updateMovement(sf::Time timeDelta)
+    void updateMovement(Time timeDelta)
     {
         updateCurrentAccelration(timeDelta);
         updateCurrentVelocity(timeDelta);
     }
 
-    void updateCurrentAccelration(sf::Time timeDelta)
+    void updateCurrentAccelration(Time timeDelta)
     {
         //instant accelration;
         MeterPerSecond velocityDelta = mTargetParameters.Velocity - mCurrentParameters.Velocity;
@@ -100,7 +100,7 @@ private:
         }
     }
 
-    void updateCurrentVelocity(sf::Time timeDelta)
+    void updateCurrentVelocity(Time timeDelta)
     {
         mCurrentParameters.Velocity += (mCurrentParameters.Accelration * timeDelta.asSeconds());
         if(fabs(mCurrentParameters.Velocity)>mMaxParameters.Velocity)
@@ -114,11 +114,11 @@ private:
         }
     }
 
-    Meter getCurrentMovedDistance(sf::Time timeDelta) const{
+    Meter getCurrentMovedDistance(Time timeDelta) const{
         return this->mCurrentParameters.Velocity * timeDelta.asSeconds();
     }
 
-    Degree getCurrentTurningDegree(sf::Time timeDelta) const{
+    Degree getCurrentTurningDegree(Time timeDelta) const{
         return this->mCurrentParameters.AngularVelocity * timeDelta.asSeconds();
     }
 

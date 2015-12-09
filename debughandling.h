@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include <SFML/System/Time.hpp>
+#include "timeclass.h"
 
 enum LogLevel {
     Error = 0,
@@ -11,7 +11,7 @@ enum LogLevel {
     Information
 };
 
-extern void registerLogGameTime(sf::Time* p_LogGameTime);
+extern void registerLogGameTime(Time* p_LogGameTime);
 extern void unregisterLogGameTime();
 
 extern void printLogMessage(std::string message);

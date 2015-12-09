@@ -1,11 +1,11 @@
 #ifndef IUPDATEABLE
 #define IUPDATEABLE
 
-#include <SFML/System/Time.hpp>
+#include "timeclass.h"
 
 class iUpdateable{
 public:
-    virtual void update(sf::Time timeDelta) = 0;
+    virtual void update(Time timeDelta) = 0;
 };
 
 #endif // IUPDATEABLE

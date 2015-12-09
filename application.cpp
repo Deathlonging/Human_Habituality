@@ -21,13 +21,13 @@ void Application::init()
 
 void Application::run()
 {
-    sf::Clock clock;
-    sf::Time processingTimeDelta = sf::Time::Zero;
+    Clock clock;
+    Time processingTimeDelta = Time::Zero;
     while(mMainWindow.isOpen())
     {
         processingTimeDelta = clock.getElapsedTime();
         clock.restart();
-        if(processingTimeDelta > sf::Time::Zero)
+        if(processingTimeDelta > Time::Zero)
         {
             processInput();
             update(processingTimeDelta);
@@ -50,7 +50,7 @@ void Application::processInput()
     }
 }
 
-void Application::update(sf::Time timeDelta)
+void Application::update(Time timeDelta)
 {
     switch(mCurrentState)
     {

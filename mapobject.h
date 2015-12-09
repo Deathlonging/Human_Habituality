@@ -14,8 +14,11 @@ public:
     MapObject(MapView& mapView);
     virtual ~MapObject();
     virtual Vector2D getPosition() const=0;
+    float getSecondsSinceExistence() const;
 protected:
     MapView& mMapView;
+private:
+    Time mTimeSinceExistence;
 };
 
 #endif // MAPOBJECT_H

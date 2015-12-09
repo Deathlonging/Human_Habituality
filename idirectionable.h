@@ -103,6 +103,8 @@ protected:
 
     virtual void changeDirection(const Degree degree){mDirection.change(degree);}
 
+    Vector2D getCurrentDirectionUnitVector() const {return mDirection.getUnitVector();}
+
 private:
     Direction mDirection;
 };

@@ -1,12 +1,10 @@
 #include "debughandling.h"
 
-#include <SFML/Graphics.hpp>
-
 static std::ostream& logStream = std::cout;
 static LogLevel currentLogLevel = Information;
-static sf::Time* sp_LogGameTime = nullptr;
+static Time* sp_LogGameTime = nullptr;
 
-void registerLogGameTime(sf::Time* p_LogGameTime)
+void registerLogGameTime(Time* p_LogGameTime)
 {
     sp_LogGameTime = p_LogGameTime;
 }

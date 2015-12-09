@@ -47,7 +47,7 @@ bool Map::isBlockAt(const double x, const double y) const
 
 MapBlock Map::getMapBlockAt(const double x, const double y) const
 {
-    double blockSize = this->getBlockSize();
+    double blockSize = MapBlock::getBlockSize();
     int xInt = x/blockSize;
     int yInt = y/blockSize;
     if(isBlockAt(xInt,yInt))
@@ -64,10 +64,5 @@ MapBlock Map::getMapBlockAt(const double x, const double y) const
 MapBlock Map::getMapBlockAt(const Vector2D position) const
 {
     return this->getMapBlockAt(position.x,position.y);
-}
-
-double Map::getBlockSize()
-{
-    return MapBlock::getBlockSize();
 }
 

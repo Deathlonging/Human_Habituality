@@ -7,6 +7,7 @@
 #include "iupdateable.h"
 #include "map.h"
 #include "mapobject.h"
+#include "timeclass.h"
 
 #define COUNT_OF_VISITORS 10
 
@@ -16,12 +17,12 @@ public:
     Game(sf::RenderWindow& window);
     ~Game();
     void init();
-    void update(sf::Time timeDelta);
+    void update(Time timeDelta);
     void draw() const;
 private:
     Map mMap;
     std::list<MapObject*> mMapObjects;
-    sf::Time mGameTime;
+    Time mGameTime;
     sf::RenderWindow& mWindow;
 
     void createTestszenario();

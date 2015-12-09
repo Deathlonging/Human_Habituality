@@ -7,7 +7,7 @@
 #include "debughandling.h"
 #include "mapview.h"
 
-Game::Game(sf::RenderWindow &window) : mMap(), mGameTime(sf::Time::Zero), mWindow(window)
+Game::Game(sf::RenderWindow &window) : mMap(), mGameTime(Time::Zero), mWindow(window)
 {
     registerLogGameTime(&mGameTime);
 }
@@ -23,12 +23,11 @@ Game::~Game()
 
 void Game::init()
 {
-    Visitor::setBlockSize(Map::getBlockSize());
     mMap.init();
     createTestszenario();
 }
 
-void Game::update(sf::Time timeDelta)
+void Game::update(Time timeDelta)
 {
     mGameTime += timeDelta;
     for(auto& mapObject: mMapObjects)

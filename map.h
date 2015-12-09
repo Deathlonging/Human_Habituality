@@ -24,8 +24,6 @@ public:
     bool isBlockAt(const double x, const double y) const;
     MapBlock getMapBlockAt(const double x, const double y) const;
     MapBlock getMapBlockAt(const Vector2D position) const;
-
-    static double getBlockSize();
 private:
     std::map<const MapBlock::Position,MapBlock> mBlocks;
 };

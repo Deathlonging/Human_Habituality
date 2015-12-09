@@ -15,6 +15,7 @@ class MapView
 public:
     MapView(const Map& map, const std::list<MapObject*>& mapObjects);
     bool isObjectAt(const Vector2D position) const;
+    static double getBlockSize();
 private:
     const Map& mMap;
     const std::list<MapObject*>& mMapObjects;

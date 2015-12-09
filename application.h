@@ -6,6 +6,8 @@
 #include "iupdateable.h"
 #include "idrawable.h"
 #include "game.h"
+#include "timeclass.h"
+#include "clock.h"
 
 #define MAIN_WINDOW_INDENT_X 40
 #define MAIN_WINDOW_INDENT_Y 40
@@ -18,7 +20,7 @@ public:
     void init();
     void run();
     void processInput();
-    void update(sf::Time timeDelta);
+    void update(Time timeDelta);
     void draw();
 private:
     enum State {
